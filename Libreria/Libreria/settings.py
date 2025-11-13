@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'appLibreria'# No es el modo en el que suelo hacer las cosas pero funciona. MK
 ]
 
 MIDDLEWARE = [
