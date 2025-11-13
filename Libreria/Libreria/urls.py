@@ -23,3 +23,10 @@ urlpatterns = [
 ]
 
 #http://127.0.0.1:8000/
+
+# NOMBRE Y CONTRA Y CORREO DEL ADMINISTRADOR:
+#Nombre:    Admin
+#Contra:    Admin
+#Correo:    Administer@gmail.com
+
+#Para conectarse: http://127.0.0.1:8000/admin/
