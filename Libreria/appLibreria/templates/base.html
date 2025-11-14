@@ -1,5 +1,5 @@
 <head>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!--<link rel="stylesheet" href="">-->
     <!-- <link rel="stylesheet" href="../static/css/style.css"> --> <!--esta linea para probar sin dajngo -->
 </head>
 <body>
@@ -7,17 +7,19 @@
         <h1 id="h1Titulo">{% block title %}Titulo de base{% endblock %}</h1>
         
         <div id="agrupadorBotones">  <!--los "view1" hay que cambiarlos -->
-            <a class="divBotones" href="{% url 'view1' %}"> 
+            <a class="divBotones" href="{% url 'antiguedad' %}"> 
                 <div class="contBoton">
                     Página Principal
                 </div>
             </a>
-            <a class="divBotones" href="{% url 'view2' %}"> 
+            <!--href=" url 'genero' Historico "-->
+            <a class="divBotones" > 
                 <div class="contBoton">
                     Busqueda por genero
                 </div>
             </a>
-            <a class="divBotones" href="{% url 'view3' %}l"> 
+            <!--href=" url 'precio' 20.95l"-->
+            <a class="divBotones"> 
                 <div class="contBoton">
                     Ofertas<!-- "Ofertas"= view de precio<25  -->
                 </div>

@@ -11,6 +11,9 @@ class Autor(models.Model):
 class Editorial(models.Model):
     nif=models.CharField(max_length=9,primary_key=True)
     nombre=models.CharField(max_length=50)
+    def __str__(self):
+        return self.nombre
+    
 class Libro(models.Model):
     isbn=models.CharField(max_length=13,primary_key=True)
     titulo=models.CharField(max_length=100)
