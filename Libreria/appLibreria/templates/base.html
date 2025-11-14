@@ -1,0 +1,30 @@
+<head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- <link rel="stylesheet" href="../static/css/style.css"> --> <!--esta linea para probar sin dajngo -->
+</head>
+<body>
+    <header id="headerBotones">
+        <h1 id="h1Titulo">{% block title %}Titulo de base{% endblock %}</h1>
+        
+        <div id="agrupadorBotones">  <!--los "view1" hay que cambiarlos -->
+            <a class="divBotones" href="{% url 'view1' %}"> 
+                <div class="contBoton">
+                    Página Principal
+                </div>
+            </a>
+            <a class="divBotones" href="{% url 'view2' %}"> 
+                <div class="contBoton">
+                    Busqueda por genero
+                </div>
+            </a>
+            <a class="divBotones" href="{% url 'view3' %}l"> 
+                <div class="contBoton">
+                    Ofertas<!-- "Ofertas"= view de precio<25  -->
+                </div>
+            </a>
+        </div>
+    </header>
+    <div id="content">
+        {% block content %}Lo que hay por defecto{% endblock %}
+    </div>
+</body>

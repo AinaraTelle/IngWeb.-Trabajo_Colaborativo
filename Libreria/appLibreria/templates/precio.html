@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <ul>
+    {% for libro in libros %}
+        <div class="muestraLibros">
+            <li> Titulo: {{libro.titulo}} </li>
+            <ul> 
+                <li> Autor: {{libro.autor}} </li>
+                <li> NumPag: {{libro.num_paginas}} </li>
+                <li> Descripcion: {{libro.descripcion}} </li>
+            </ul>
+        </div>    
+        {% endfor %}
+    </ul>
+{% endblock %}
