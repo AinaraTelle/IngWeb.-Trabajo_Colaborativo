@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -34,15 +35,9 @@ class Libro(models.Model):
     def __str__(self):
         return self.titulo
 
-class Usuario(models.Model):
-    email=models.CharField(max_length=50)
-    contrasenia=models.CharField(max_length=50)
-    nombre=models.CharField(max_length=20)
-    def __str__(self):
-        return self.nombre
 
 class Carrito(models.Model):
-    usuario=models.OneToOneField(Usuario, on_delete=models.CASCADE)
+    usuario=models.OneToOneField(User, on_delete=models.CASCADE)
     libros = models.ManyToManyField(Libro)
     @property
     def total(self):
