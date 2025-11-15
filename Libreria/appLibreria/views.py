@@ -23,5 +23,14 @@ def portadaYAntiguedad(request): #devuelve la portada tambien pero no he encontr
     return render(request, 'inicio_novedades.html')
 
 def precio(request, precio_libro):
-    precio_lib = float(precio_libro)
-    return HttpResponse("Precio de libro %f" %precio_lib)
+    try:
+        precio_lib = float(precio_libro)
+        Libros=models.Libro.objects.filter(precio<=precio_libro)
+        context = {
+            'Libros': Libros
+        }
+    except models.Libro.DoesNotExist:#Pagina personalizada del error
+        raise Http404("No hay ningun libro de dicho genero")
+    
+    return render(request, 'precio.html',context)
+    #return HttpResponse("Precio de libro %f" %precio_lib)
