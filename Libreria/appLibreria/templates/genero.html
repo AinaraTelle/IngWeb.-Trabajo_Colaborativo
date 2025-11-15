@@ -1,16 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
     <h2>A continuación se muestran los libros de tu genero deseado:</h2>
-    <ul>
-    {% for libro in Libros %}
-        <div class="muestraLibros">
-            <li> Titulo: {{libro.titulo}} </li>
-            <li> Autor: {{libro.autor}} </li>
-            <li> NumPag: {{libro.num_paginas}} </li>
-            <li> Descripción: {{libro.descripcion}} </li>
-            <li>--------------------------------------</li>
-            <br>
-        </div>    
-        {% endfor %}
-    </ul>
+    <div class="muestraLibros">
+        <ul>
+        {% for libro in Libros %}
+            
+                <li> Titulo: {{libro.titulo}} </li>
+                <li> Autor: {{libro.autor}} </li>
+                <li> NumPag: {{libro.num_paginas}} </li>
+                <li> Descripción: {{libro.descripcion}} </li>
+                <li>--------------------------------------</li>
+            
+            {% endfor %}
+        </ul>
+    </div>    
 {% endblock %}

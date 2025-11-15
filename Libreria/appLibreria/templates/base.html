@@ -1,10 +1,17 @@
 
-{% load static %}
+<!DOCTYPE html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--<link rel="stylesheet" href="">-->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!--esta linea para probar sin dajngo -->
+     <!--esta linea para probar sin dajngo -->
+    <title>BaseHTML</title>
 </head>
 <body>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
     <header id="headerBotones">
         <h1 id="h1Titulo">{% block title %}Titulo de base{% endblock %}</h1>
         
@@ -38,3 +45,4 @@
         {% block content %}Lo que hay por defecto{% endblock %}
     </div>
 </body>
+</html>

@@ -2,18 +2,20 @@
 
 {% block content %}
 <h2>Filtro de libros menores de {{Prec_lib}} euros:</h2>
+    <div class="muestraLibros">
     <ul>
     {% for libro in Libros %}
-        <div class="muestraLibros">
+       
             <li> Titulo: {{libro.titulo}} </li>
-            <ul> 
-                <li> Autor: {{libro.autor}} </li>
-                <li> NumPag: {{libro.num_paginas}} </li>
-                <li> Descripcion: {{libro.descripcion}} </li>
-                <li> Precio: {{libro.precio}} euros</li>
-                <li>--------------------------------------</li>
-            </ul>
-        </div>    
+            
+            <li> Autor: {{libro.autor}} </li>
+            <li> NumPag: {{libro.num_paginas}} </li>
+            <li> Descripcion: {{libro.descripcion}} </li>
+            <li> Precio: {{libro.precio}} euros</li>
+            <li>--------------------------------------</li>
+            
+           
         {% endfor %}
     </ul>
+    </div> 
 {% endblock %}
