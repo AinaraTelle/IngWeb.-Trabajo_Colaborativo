@@ -11,11 +11,10 @@ def genero(request, genero_libro):
         Libros = models.Libro.objects.filter(genero=genero_libro)#Filtramos todos los libros del genero que se ha escogido y los guardamos en Libros
         context = { #Creamos contexto, que se la pasaremos a la HTML para que sepa el contenido de cada variable
             'Libros':  Libros#Lista de objetos "libro"
-            
         }
         print("Genero del libro: ", genero_libro)
     except models.Libro.DoesNotExist:#Pagina personalizada del error
-        raise Http404("No se encuentra ellibro")
+        raise Http404("No hay ningun libro de dicho genero")
     return render(request, 'genero.html', context) #Render se usa para crear un HTML como resuesta, por decirlo simple, y le pasamos lo que necesita para funcionar
         #return HttpResponse("Consultando genero del libro %s." %genero_libro)
 
