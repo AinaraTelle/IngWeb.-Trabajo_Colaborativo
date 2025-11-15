@@ -21,6 +21,7 @@ class Libro(models.Model):
     fecha_publicacion=models.DateField()#Importante: No hay en django una función que solo se pueda poner año y mes
     precio=models.FloatField()
     num_paginas=models.IntegerField()
+    stock=models.IntegerField()
     autor=models.ForeignKey(Autor,on_delete=models.CASCADE)
     editorial=models.ForeignKey(Editorial,on_delete=models.CASCADE)
     class Genero(models.TextChoices):
@@ -34,7 +35,7 @@ class Libro(models.Model):
         euskera="EUS", "Euskera"
         ingles="ENG", "Ingles"
     idioma=models.CharField(max_length=3,choices=Idioma.choices)
-    stock=models.IntegerField
+    
     def __str__(self):
         return self.titulo
 
