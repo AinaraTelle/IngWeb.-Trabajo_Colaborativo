@@ -15,8 +15,8 @@ def genero(request, genero_libro):
         }
         print("Genero del libro: ", genero_libro)
     except models.Libro.DoesNotExist:#Pagina personalizada del error
-        raise Http404("No se encuentra el puñetero libro")
-    return render(request, 'ofertas.html', context) #Render se usa para crear un HTML como resuesta, por decirlo simple, y le pasamos lo que necesita para funcionar
+        raise Http404("No se encuentra ellibro")
+    return render(request, 'genero.html', context) #Render se usa para crear un HTML como resuesta, por decirlo simple, y le pasamos lo que necesita para funcionar
         #return HttpResponse("Consultando genero del libro %s." %genero_libro)
 
 def portadaYAntiguedad(request): #devuelve la portada tambien pero no he encontrado el atributo en modelos por lo que aun no añado
