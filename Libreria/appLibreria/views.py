@@ -25,12 +25,22 @@ def portadaYAntiguedad(request): #devuelve la portada tambien pero no he encontr
 def precio(request, precio_libro):
     try:
         precio_lib = float(precio_libro)
-        Libros=models.Libro.objects.filter(precio<=precio_libro)
+        Libros=models.Libro.objects.filter(precio__lte=precio_libro) #<= no permitido
         context = {
             'Libros': Libros
         }
     except models.Libro.DoesNotExist:#Pagina personalizada del error
-        raise Http404("No hay ningun libro de dicho genero")
+        raise Http404("No hay ningun libro de dicho precio o menor")
     
     return render(request, 'precio.html',context)
     #return HttpResponse("Precio de libro %f" %precio_lib)
+
+def masCortos(request):
+    try: 
+        Libros=models.Libro.objects.filter(num_paginas__lte=300)
+        context = {
+            'Libros': Libros
+        }
+    except models.Libro.DoesNotExist:
+        raise Http404("No hay ningun libro tan corto")
+    return render(request, 'base.html', context)
