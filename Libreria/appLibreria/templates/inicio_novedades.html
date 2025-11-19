@@ -2,17 +2,15 @@
 
 {% block content %}
     <h2>Bestsellers: </h2>
-    <div class="muestraLibros" style="border-style: solid;">
-    <ul>
+    <main class="contenedor_ListaLibros">
     {% for libro in Libros %}
-        
-            <li style="background-color: white;"> Titulo: {{libro.titulo}} </li>
-            <li> Autor: {{libro.autor}} </li>
-            <li> NumPag: {{libro.num_paginas}} </li>
-            <li> Descripcion: {{libro.descripcion}} </li>
-            <li> Stock: {{libro.stock}}</li>
-           
-        {% endfor %}
-    </ul>
-    </div> 
+        <div class="muestraLibros">
+            <ul>
+                <li> {{libro.titulo}} </li>
+                <li> {{libro.autor}} </li>
+                <li> {{libro.precio}} </li>
+            </ul>
+        </div>   
+    {% endfor %} 
+    </main>
 {% endblock %}

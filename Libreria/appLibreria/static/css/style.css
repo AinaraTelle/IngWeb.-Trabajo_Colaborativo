@@ -1,19 +1,16 @@
 body {
-    background-color: rgb(255, 210, 188);
-    padding: 15px;
+    background-color: #fff4ee;
+    /* padding: 0; */
+    margin:0;
 }
 
 
 #headerBotones{
     background-color: #d87746;
     background-size: cover; 
-    background-attachment: scroll;
-    background-position: center center;
-    background-repeat: no-repeat;
     margin-top: 0px;
     padding-top: 1px;
     margin-bottom: 30px;
-    gap:0px;
 }
 
 #agrupadorBotones{
@@ -49,14 +46,51 @@ body {
 }
 
 .muestraLibros{
-    text-align: center;
-    border-radius: 25px;
+    width: 180px;
+    height: 290px;
+    margin: 5px; 
+    
+    display: flex; /* Para centrar el número */
+    justify-content: left;
+    align-items: center;
 
+    border-radius: 15px;
+    text-align: left;
     text-decoration: none;
     font-weight: normal;
+    background-color: #ffe2d2;
 
-    background-color: #ecd3c7;
-    border-color: #a1694d;
+    border: solid 2px #965538 ;
     padding: 10px;
     margin-bottom: 15px;
+}
+
+main{
+    padding: 25px;
+    padding-top: 0px;
+}
+
+.main_ListaLibros {
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: center;
+    gap: 35px; 
+    padding: 10px;
+}
+
+.divDatosLibro{
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    gap: 0;
+    /* border: 1px solid green; */
+}
+ul{
+    list-style-type: none;
+    padding-left: 5px;
+    /* border: 2px solid blue; */
+
+}
+li{
+    margin: 5px;
 }
