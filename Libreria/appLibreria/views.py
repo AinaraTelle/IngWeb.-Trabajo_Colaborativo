@@ -26,7 +26,7 @@ def portadaYAntiguedad(request): #devuelve la portada tambien pero no he encontr
         'Libros': Libros
     }
 
-    return render(request, 'inicio_novedades.html', context)
+    return render(request, 'home.html', context)
 
 def precio(request, precio_libro):
     try:

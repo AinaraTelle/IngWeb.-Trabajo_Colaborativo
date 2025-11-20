@@ -8,41 +8,38 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>    
-    <header id="headerBotones">
-        <h1 id="h1Titulo">
-            {% block titleXD %}Titulo de base{% endblock %}
-        </h1>
-        
-        <div id="agrupadorBotones">  
-            <a class="divBotones" href="{% url 'antiguedad' %}"> 
-                <div class="contBoton">
-                    Página Principal
-                </div>
-            </a>
-            <!--href=" url 'genero' Historico "-->
-            <!--<a class="divBotones">
-                <div class="contBoton">
-                    Filtro por genero
-                </div>
-            </a>-->
-            <!--href=" url 'precio' 20.95l"-->
-            <!--<a class="divBotones"> 
-                <div class="contBoton">
-                    Ofertas
-                </div>
-            </a>-->
-        </div>
+    <header id="headerBase">
+        <aside style="background-color: green;">
+            <!-- meter imagen -->
+        </aside>
+        <section>
+            <h1 id="TituloPagina">
+                {% block titleXD %}Titulo de base{% endblock %}
+            </h1>
+            
+            <div id="agrupBotonesHeader">  
+                <a class="botonHeader" href="{% url 'antiguedad' %}"> 
+                    <div > Página Principal</div>
+                </a>
+                <a class="botonHeader" href="{% url 'antiguedad' %}"> 
+                    <div>Generos</div>
+                </a>
+                <a class="botonHeader" href="{% url 'antiguedad' %}"> 
+                    <div >Autores</div>
+                </a>
+                <a class="botonHeader" href="{% url 'antiguedad' %}"> 
+                    <div >Precios</div>
+                </a>
+                <a class="botonHeader" href="{% url 'antiguedad' %}"> 
+                    <div >Cuenta </div>
+                </a>
+            </div>
+        </section>
+      
     </header>
-    <main id="content">
-        <h2>Filtro por genero: </h2>
-        <p>Para buscar por genero introducir en el buscador: "http://127.0.0.1:8000/app/genero/V/" 
-            siendo V un ejemplo que se cambia por H = historico, R = Romance, A = Accion, F = Ficcion</p>
 
-        <h2>Filtro por ofertas: </h2>
-        <p>Para buscar por ofertas introducir en el buscador:  "http://127.0.0.1:8000/app/precio/P/" 
-            siento P el numero entero o decimal (Ej: 20; 15.99; 21.92) que quiere pagar de máximo</p>
+    {% block main %}
 
-        {% block content %}Lo que hay por defecto{% endblock %}
-        </main>
+    {% endblock %}
 </body>
 </html>

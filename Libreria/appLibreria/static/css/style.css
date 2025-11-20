@@ -1,48 +1,55 @@
 body {
-    background-color: #fff4ee;
+    background-color: #ffe2d2;
     /* padding: 0; */
     margin:0;
 }
 
-
-#headerBotones{
+#headerBase{
     background-color: #d87746;
-    background-size: cover; 
-    margin-top: 0px;
-    padding-top: 1px;
     margin-bottom: 30px;
+
+    display: grid;
+    grid-template-columns: 30% 70%;
 }
 
-#agrupadorBotones{
+#agrupBotonesHeader{
     display: flex;
     flex-direction: row;
     flex:1;
-    gap: 30px;
-    padding: 30px;
+    gap: 15px;
+    padding: 15px;
+    border: solid 2px blue;
 }
-#h1Titulo{
-    text-align: center;
+#TituloPagina{
+    text-align: right;
     background-color: rgba(214, 230, 255, 0.655);
-    margin-right: 24vw;
-    margin-left: 24vw;
+    margin-right: 2vw;
+    margin-left: 50vw;
     border-radius: 10px;
     font-size: 50px;
     padding: 3px;
+    border: solid 2px blue;
 }
 
-.divBotones{
+.botonHeader{
+    display: flex;
     flex:1;
     text-align: center;
-    border-radius: 25px;
+    justify-content: center; 
+    align-items: center;
+    border-radius: 20px;
 
     text-decoration: none;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: normal;
     font-size: 16px;
 
-    color:#fff4ee;
-    background-color: #d49575;
-    padding: 10px;
+    /* color:#fff4ee;
+    background-color: #d49575; */
+    background-color:#fff4ee;
+    border: solid 2px #7a4420;
+    color:#d87746;
+    padding: 20px;
 }
 
 .muestraLibros{
@@ -58,8 +65,8 @@ body {
     text-align: left;
     text-decoration: none;
     font-weight: normal;
-    background-color: #ffe2d2;
 
+    background-color: #fff4ee;
     border: solid 2px #965538 ;
     padding: 10px;
     margin-bottom: 15px;
