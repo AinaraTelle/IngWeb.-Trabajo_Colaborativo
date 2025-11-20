@@ -1,9 +1,9 @@
 {% extends "base.html" %}
-{% block titleXD %}xd{% endblock %}
+{% block titleXD %}Géneros{% endblock %}
 
-{% block content %}
+{% block main %}
     
-    <h2>A continuación se muestran los libros de tu genero deseado:</h2>
+    <h2 style="margin: 20px;">A continuación se muestran los libros de tu genero deseado:</h2>
     <main class="main_ListaLibros">
     {% for libro in Libros %}
         <div class="muestraLibros">
