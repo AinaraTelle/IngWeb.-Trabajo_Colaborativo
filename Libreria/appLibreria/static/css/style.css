@@ -2,11 +2,14 @@ body {
     background-color: #ffe2d2;
     /* padding: 0; */
     margin:0;
+    min-width: 830px;
 }
 
 #headerBase{
     background-color: #d87746;
     margin-bottom: 30px;
+
+    /* padding-bottom: 10px; */
 
     display: grid;
     grid-template-columns: 30% 70%;
@@ -16,19 +19,20 @@ body {
     display: flex;
     flex-direction: row;
     flex:1;
-    gap: 15px;
+    gap: 10px;
     padding: 15px;
-    border: solid 2px blue;
+    /* border: solid 2px blue; */
 }
 #TituloPagina{
     text-align: right;
-    background-color: rgba(214, 230, 255, 0.655);
-    margin-right: 2vw;
-    margin-left: 50vw;
-    border-radius: 10px;
+    /* background-color: rgba(214, 230, 255, 0.655); */
+    color:#fff4ee;
+     margin-right: 2vw;
+    /*margin-left: 50vw;
+    border-radius: 10px; */
     font-size: 50px;
     padding: 3px;
-    border: solid 2px blue;
+    /* border: solid 2px blue; */
 }
 
 .botonHeader{
@@ -83,6 +87,12 @@ main{
     justify-content: center;
     gap: 35px; 
     padding: 10px;
+}
+.centradoEnMedio{
+    display: flex; 
+    justify-content: center;
+    text-align: center;
+    align-items: center;
 }
 
 .divDatosLibro{

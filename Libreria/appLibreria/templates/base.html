@@ -9,17 +9,18 @@
 </head>
 <body>    
     <header id="headerBase">
-        <aside style="background-color: green;">
-            <!-- meter imagen -->
+        <aside  class="centradoEnMedio" >
+            <img src="{% static 'imgs/Papirium_LogoCuadTxiki.png' %}" alt="Logo"
+            height=220 width=220>
         </aside>
         <section>
             <h1 id="TituloPagina">
-                {% block titleXD %}Titulo de base{% endblock %}
+               {% block titleXD %} <b>Titulo de base </b>{% endblock %} 
             </h1>
             
             <div id="agrupBotonesHeader">  
                 <a class="botonHeader" href="{% url 'antiguedad' %}"> 
-                    <div > Página Principal</div>
+                    <div > Home</div>
                 </a>
                 <a class="botonHeader" href="{% url 'antiguedad' %}"> 
                     <div>Generos</div>
@@ -35,11 +36,10 @@
                 </a>
             </div>
         </section>
-      
     </header>
 
     {% block main %}
-
     {% endblock %}
+
 </body>
 </html>
