@@ -4,6 +4,7 @@
 {% block main %}
     <main class="main_ListaLibros">
     {% for libro in Libros %}
+        <a href="{% url 'detalleLibro' libro.isbn %}"><!--Le ponemos de destino el URL de detalles y le pasamos el ISBN del libro cuyos detalles queremos ver-->
         {% if libro.imagen %}<!--If hace que si no hay imagen no de error y simplemente aparezca normal, sin fondo-->
             <div class="muestraLibros" style="background-image: url('{{libro.imagen.url}}'); background-size: cover;"><!--Le pasamos la url de la imagen-->
                 <ul>
@@ -24,6 +25,7 @@
                 </ul>
             </div>   
         {% endif %}
+        </a>
     {% endfor %} 
     </main>
 {% endblock %}

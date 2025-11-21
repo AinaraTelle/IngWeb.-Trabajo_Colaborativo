@@ -28,6 +28,11 @@ def portadaYAntiguedad(request): #devuelve la portada tambien pero no he encontr
 
     return render(request, 'home.html', context)
 
+def detalles_libro(request, isbn_sel):
+    Libro = models.Libro.objects.get(isbn=isbn_sel)#Obtenemos el libro cuyo isbn es el mismo que el que qeremos ver detallado
+
+    return render(request, 'detalles.html', {'libro': Libro})#Esta forma de pasarle "Libro" es la misma de siempre pero sin meterlo todo en una variable
+
 def precio(request, precio_libro):
     try:
         precio_lib = Decimal(precio_libro)
