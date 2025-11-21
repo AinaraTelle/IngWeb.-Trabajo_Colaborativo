@@ -54,3 +54,13 @@ def masCortos(request):
     except models.Libro.DoesNotExist:
         raise Http404("No hay ningun libro tan corto")
     return render(request, 'inicio_novedades.html', context)
+
+def busqueda_autor(request, autor_seleccionado):
+    try:
+        Libros=models.Libro.objects.filter(autor=autor_seleccionado)
+        context={
+            'Libros':Libros
+        }
+    except models.Libro.DoesNotExist:
+        raise Http404("No existe el autor")
+    return render(request, 'autor.html', context)
