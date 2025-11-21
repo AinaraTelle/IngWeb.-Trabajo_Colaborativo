@@ -17,6 +17,7 @@ class Editorial(models.Model):
 class Libro(models.Model):
     isbn=models.CharField(max_length=13,primary_key=True)
     titulo=models.CharField(max_length=100)
+    imagen=models.ImageField(upload_to='',null=True)#El uploadto es si en media tenemos subcarpetas deberiamos de especificar pero en este caso no
     descripcion=models.CharField(max_length=300)
     fecha_publicacion=models.DateField()#Importante: No hay en django una función que solo se pueda poner año y mes
     precio=models.FloatField()
