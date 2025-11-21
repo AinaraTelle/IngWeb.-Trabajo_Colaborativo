@@ -4,13 +4,26 @@
 {% block main %}
     <main class="main_ListaLibros">
     {% for libro in Libros %}
-        <div class="muestraLibros">
-            <ul>
-                <li> {{libro.titulo}} </li>
-                <li> {{libro.autor}} </li>
-                <li> {{libro.precio}} </li>
-            </ul>
-        </div>   
+        {% if libro.imagen %}<!--If hace que si no hay imagen no de error y simplemente aparezca normal, sin fondo-->
+            <div class="muestraLibros" style="background-image: url('{{libro.imagen.url}}'); background-size: cover;"><!--Le pasamos la url de la imagen-->
+                <ul>
+        
+                    <li> {{libro.titulo}} </li>
+                    <li> {{libro.autor}} </li>
+                    <li> {{libro.precio}} Euros</li>
+                </ul>
+            </div>   
+        {% else %}
+            <div class="muestraLibros">
+                <p>Aun sin imagen</p>
+                <ul>
+                    
+                    <li> {{libro.titulo}} </li>
+                    <li> {{libro.autor}} </li>
+                    <li> {{libro.precio}} Euros</li>
+                </ul>
+            </div>   
+        {% endif %}
     {% endfor %} 
     </main>
 {% endblock %}
