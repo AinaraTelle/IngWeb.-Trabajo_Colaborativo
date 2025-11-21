@@ -20,6 +20,18 @@ def genero(request, genero_libro):
     return render(request, 'genero.html', context) #Render se usa para crear un HTML como resuesta, por decirlo simple, y le pasamos lo que necesita para funcionar
         #return HttpResponse("Consultando genero del libro %s." %genero_libro)
 
+
+def generoTodosLibros(request):
+    try:
+        Libros = models.Libro.objects.all()#Filtramos todos los libros del genero que se ha escogido y los guardamos en Libros
+        context = { #Creamos contexto, que se la pasaremos a la HTML para que sepa el contenido de cada variable
+            'Libros':  Libros, #Lista de objetos "libro"
+        }
+    except models.Libro.DoesNotExist:#Pagina personalizada del error
+        raise Http404("No hay ningun libro de dicho genero")
+    return render(request, 'genero.html', context) #Render se usa para crear un HTML como resuesta, por decirlo simple, y le pasamos lo que necesita para funcionar
+      
+
 def portadaYAntiguedad(request): #devuelve la portada tambien pero no he encontrado el atributo en modelos por lo que aun no añado
     Libros = models.Libro.objects.filter(stock__gte=20)
     context = {

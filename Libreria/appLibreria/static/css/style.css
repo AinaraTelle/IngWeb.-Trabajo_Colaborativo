@@ -103,12 +103,33 @@ main{
     gap: 0;
     /* border: 1px solid green; */
 }
-ul{
+.datosLibro ul{
     list-style-type: none;
     padding-left: 5px;
     /* border: 2px solid blue; */
 
 }
-li{
+.datosLibro li{
     margin: 5px;
+}
+
+.elegirGenero{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+
+}
+
+.eleccionGenero{
+    border: solid 1px #c0a390;
+    border-radius: 5px;
+    display: flex;
+    flex:1;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    padding: 15px 15px;
+    color:#1a0d07;
+    text-decoration: none;
+    font-size: 16px;
 }
