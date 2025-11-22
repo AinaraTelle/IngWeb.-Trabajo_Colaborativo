@@ -10,7 +10,7 @@
         {% if libro.imagen %}<!--If hace que si no hay imagen no de error y simplemente aparezca normal, sin fondo-->
         <div class="muestraLibros">
             <a href="{% url 'detalleLibro' libro.isbn %}"><!--Le ponemos de destino el URL de detalles y le pasamos el ISBN del libro cuyos detalles queremos ver-->
-            <div  class="fondo_libros" style="background-image: url('{{libro.imagen.url}}'); background-size: cover;"><!--Le pasamos la url de la imagen-->
+            <div  class="fondo_libros" style="background-image: url('{{libro.imagen.url}}'); background-size: cover; alt: Error al cargar la imagen;"><!--Le pasamos la url de la imagen-->
                 
             </div></a>
             <div class="libros_letras">
@@ -23,15 +23,15 @@
         </div>
         {% else %}
             <div class="muestraLibros">
-            <a href="{% url 'detalleLibro' libro.isbn %}"><!--Le ponemos de destino el URL de detalles y le pasamos el ISBN del libro cuyos detalles queremos ver-->
-            <div  class="fondo_libros" style="background-image: url('{{libro.imagen.url}}'); background-size: cover;"><!--Le pasamos la url de la imagen-->
-                
+            <a href="{% url 'detalleLibro' libro.isbn %}">
+            <div>   
+                <p>Lo sentimos, el libro no tiene imagen, aun. Haz click aqui para ver detalles del libro</p>             
             </div></a>
             <div class="libros_letras">
             <ul>
-                <li><strong>Titulo: </strong> {{libro.titulo}} </li>
-                <li><strong>Autor: </strong> {{libro.autor}} </li>
-                <li><strong>Precio: </strong> {{libro.precio}} </li>
+                <li><strong> {{libro.titulo}} </strong></li>
+                <li> {{libro.autor}} </li>
+                <li> {{libro.precio}} EUR</li>
             </ul>  
             </div>
         </div>

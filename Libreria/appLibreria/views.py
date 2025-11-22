@@ -33,7 +33,7 @@ def generoTodosLibros(request):
       
 
 def portadaYAntiguedad(request): #devuelve la portada tambien pero no he encontrado el atributo en modelos por lo que aun no añado
-    Libros = models.Libro.objects.filter(stock__gte=20)
+    Libros = models.Libro.objects.filter(stock__gte=1)
     context = {
         'Libros': Libros
     }
