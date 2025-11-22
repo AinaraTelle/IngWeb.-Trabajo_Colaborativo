@@ -2,30 +2,42 @@
 {% block titleXD %}Home{% endblock %}
 
 {% block main %}
-    <main class="main_ListaLibros">
+    <main>
+        <h2 class="titulos_h2">Algunos libros de nuestra colección:</h2>
+        </br>
+    <div class="div_ListaLibros">
     {% for libro in Libros %}
-        <a href="{% url 'detalleLibro' libro.isbn %}"><!--Le ponemos de destino el URL de detalles y le pasamos el ISBN del libro cuyos detalles queremos ver-->
         {% if libro.imagen %}<!--If hace que si no hay imagen no de error y simplemente aparezca normal, sin fondo-->
-            <div class="muestraLibros" style="background-image: url('{{libro.imagen.url}}'); background-size: cover;"><!--Le pasamos la url de la imagen-->
-                <ul>
-        
-                    <li> {{libro.titulo}} </li>
-                    <li> {{libro.autor}} </li>
-                    <li> {{libro.precio}} Euros</li>
-                </ul>
-            </div>   
+        <div class="muestraLibros">
+            <a href="{% url 'detalleLibro' libro.isbn %}"><!--Le ponemos de destino el URL de detalles y le pasamos el ISBN del libro cuyos detalles queremos ver-->
+            <div  class="fondo_libros" style="background-image: url('{{libro.imagen.url}}'); background-size: cover;"><!--Le pasamos la url de la imagen-->
+                
+            </div></a>
+            <div class="libros_letras">
+            <ul>
+                <li><strong> {{libro.titulo}} </strong></li>
+                <li> {{libro.autor}} </li>
+                <li> {{libro.precio}} EUR</li>
+            </ul>  
+            </div>
+        </div>
         {% else %}
             <div class="muestraLibros">
-                <p>Aun sin imagen</p>
-                <ul>
-                    
-                    <li> {{libro.titulo}} </li>
-                    <li> {{libro.autor}} </li>
-                    <li> {{libro.precio}} Euros</li>
-                </ul>
-            </div>   
+            <a href="{% url 'detalleLibro' libro.isbn %}"><!--Le ponemos de destino el URL de detalles y le pasamos el ISBN del libro cuyos detalles queremos ver-->
+            <div  class="fondo_libros" style="background-image: url('{{libro.imagen.url}}'); background-size: cover;"><!--Le pasamos la url de la imagen-->
+                
+            </div></a>
+            <div class="libros_letras">
+            <ul>
+                <li><strong>Titulo: </strong> {{libro.titulo}} </li>
+                <li><strong>Autor: </strong> {{libro.autor}} </li>
+                <li><strong>Precio: </strong> {{libro.precio}} </li>
+            </ul>  
+            </div>
+        </div>
         {% endif %}
-        </a>
+        
     {% endfor %} 
+    </div>
     </main>
 {% endblock %}
