@@ -21,18 +21,13 @@ body {
     flex:1;
     gap: 10px;
     padding: 15px;
-    /* border: solid 2px blue; */
 }
 #TituloPagina{
     text-align: right;
-    /* background-color: rgba(214, 230, 255, 0.655); */
     color:#fff4ee;
-     margin-right: 2vw;
-    /*margin-left: 50vw;
-    border-radius: 10px; */
+    margin-right: 2vw;
     font-size: 50px;
     padding: 3px;
-    /* border: solid 2px blue; */
 }
 
 .botonHeader{
@@ -48,8 +43,6 @@ body {
     font-weight: normal;
     font-size: 16px;
 
-    /* color:#fff4ee;
-    background-color: #d49575; */
     background-color:#fff4ee;
     border: solid 2px #7a4420;
     color:#d87746;
@@ -60,34 +53,35 @@ body {
     width: 180px;
     height: 380px;
     margin: 5px; 
-    
-    display: flex; /* Para centrar el número */
-    flex-direction: column;
+    padding: 8px;
+    display: grid; /* Para centrar el número */
+    grid-template-rows: 70% 30%;
 
     border-radius: 15px;
     background-color: #fff4ee;
     border: solid 2px #965538 ;
     /*padding: 10px;*/
     margin-bottom: 15px;
+    text-decoration: none;
 }
 
 .fondo_libros{
-    width: 180px;
-    height: 270px;
-
-    border-radius: 13px;
+    width: auto;
+    height: auto;
+    justify-content: left;
+    align-items: center;
+    
+    background-size: cover; 
 }
 
 .libros_letras{
     text-align: left;
-    text-decoration: none;
-    font-weight: normal;
-
+    display: flex;
     justify-content: left;
     align-items: center;
+    padding-right: 3px;
 
-    margin-left: 2px;
-    margin-right: 2px;
+    /* border: 2px solid black; */
 }
 
 main{
@@ -120,16 +114,34 @@ main{
     flex-direction: column;
     padding: 0;
     gap: 0;
-    /* border: 1px solid green; */
+    border: 1px solid green;
 }
-.datosLibro ul{
+.datosLibro {
+    justify-content: center;
+    align-items: center;
+    padding-top: 0px;
     list-style-type: none;
-    padding-left: 5px;
-    /* border: 2px solid blue; */
-
+    padding-left: 2px;
+    margin-right: 2px;
+    color:#1a0d07;
+    width: 100%;
+   
+    /* border: 2px solid rgb(255, 242, 0); */
 }
-.datosLibro li{
+.datosLibro li {
     margin: 5px;
+    text-decoration: none;
+    /* border: 2px solid rgb(9, 255, 0); */
+}
+#Dprecio{
+    color: #8d3800;
+    font-size: 20px;
+    text-align: center;
+}
+#Dprecio{
+    color: #8d3800;
+    font-size: 20px;
+    text-align: center;
 }
 
 .elegirGenero{

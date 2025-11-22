@@ -5,39 +5,40 @@
     <main>
         <h2 class="titulos_h2">Algunos libros de nuestra colección:</h2>
         </br>
-    <div class="div_ListaLibros">
-    {% for libro in Libros %}
-        {% if libro.imagen %}<!--If hace que si no hay imagen no de error y simplemente aparezca normal, sin fondo-->
-        <div class="muestraLibros">
-            <a href="{% url 'detalleLibro' libro.isbn %}"><!--Le ponemos de destino el URL de detalles y le pasamos el ISBN del libro cuyos detalles queremos ver-->
-            <div  class="fondo_libros" style="background-image: url('{{libro.imagen.url}}'); background-size: cover; alt: Error al cargar la imagen;"><!--Le pasamos la url de la imagen-->
-                
-            </div></a>
-            <div class="libros_letras">
-            <ul>
-                <li><strong> {{libro.titulo}} </strong></li>
-                <li> {{libro.autor}} </li>
-                <li> {{libro.precio}} EUR</li>
-            </ul>  
-            </div>
-        </div>
-        {% else %}
-            <div class="muestraLibros">
-            <a href="{% url 'detalleLibro' libro.isbn %}">
-            <div>   
-                <p>Lo sentimos, el libro no tiene imagen, aun. Haz click aqui para ver detalles del libro</p>             
-            </div></a>
-            <div class="libros_letras">
-            <ul>
-                <li><strong> {{libro.titulo}} </strong></li>
-                <li> {{libro.autor}} </li>
-                <li> {{libro.precio}} EUR</li>
-            </ul>  
-            </div>
-        </div>
-        {% endif %}
-        
-    {% endfor %} 
-    </div>
+        <article class="div_ListaLibros">
+            {% for libro in Libros %}
+                {% if libro.imagen %}
+                <a class="muestraLibros" href="{% url 'detalleLibro' libro.isbn %}">
+                    <div class="fondo_libros"
+                    style="background-image: url('{{libro.imagen.url}}');
+                    border: 1px solid #c1ab9c;"> 
+                    </div>
+               
+                    <div class="libros_letras">
+                        <ul class="datosLibro">
+                            <li class="datosLibro" id="Dtituto"> <strong>{{libro.titulo}}</strong> </li>
+                            <li class="datosLibro" id="Dautor"> {{libro.autor}} </li>
+                            <li class="datosLibro" id="Dprecio"> <strong>{{libro.precio}} €</strong></li>
+                        </ul>  
+                    </div>
+                </a>
+                {% else %}
+                <div class="muestraLibros">
+                    <a href="{% url 'detalleLibro' libro.isbn %}">
+                        <div>   
+                            <p>Sin imagen</p>             
+                        </div>
+                    </a>
+                    <div class="libros_letras">
+                        <ul class="datosLibro">
+                            <li class="datosLibro"> <strong>{{libro.titulo}}</strong> </li>
+                            <li class="datosLibro"> {{libro.autor}} </li>
+                            <li class="datosLibro" id="Dprecio"> <strong>{{libro.precio}} €</strong></li>
+                        </ul>  
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %} 
+            </article> 
     </main>
 {% endblock %}
