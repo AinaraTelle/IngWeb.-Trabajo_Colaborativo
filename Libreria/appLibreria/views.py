@@ -82,12 +82,17 @@ def masCortos(request):
         raise Http404("No hay ningun libro tan corto")
     return render(request, 'inicio_novedades.html', context)
 
-def busqueda_autor(request, autor_seleccionado):
-    try:
-        Libros=models.Libro.objects.filter(autor=autor_seleccionado)
-        context={
-            'Libros':Libros
-        }
-    except models.Libro.DoesNotExist:
-        raise Http404("No existe el autor")
+def busqueda_autor(request):
+    autores=models.Autor.objects.all()
+    autorbuscado_id=request.GET.get('autor_seleccionado')
+    if autorbuscado_id:#Si hay alguna id seleccionada
+        autorbuscado_id=int(autorbuscado_id)
+        libros=models.Libro.objects.filter(autor_id=autorbuscado_id)#Pasando el str en int sino no detecta el filtro de autor
+    else:#Por default o si no hay autor seleccionado
+        libros=models.Libro.objects.all()
+    context= {
+        'autores':autores,
+        'autor_seleccionado':autorbuscado_id,
+        'libros':libros
+    }
     return render(request, 'autor.html', context)

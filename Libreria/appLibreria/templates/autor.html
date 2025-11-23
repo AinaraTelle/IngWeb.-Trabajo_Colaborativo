@@ -1,0 +1,60 @@
+{% extends "base.html"%}
+{%block title%}Autores{%endblock%}
+{%block main%}
+<main>
+    <h2>Seleccione el autor:</h2>
+    <br>
+
+    {%for autor in autores%}
+    <form method="get">
+        <input type="hidden" name="autor_seleccionado" value="{{ autor.id }}">
+        <button type="submit">{{ autor.nombre }}</button>
+    </form>
+    {% endfor %}
+
+    <article class="div_ListaLibros">
+        {% for libro in libros %}
+            {% if libro.imagen %}
+            <div class="muestraLibros">
+                <a href="{% url 'detalleLibro' libro.isbn %}">
+                    <img class="fondo_libros" src="{{libro.imagen.url}}" alt="Sin imagen">
+                </a>
+                <section class="libros_letras">
+                    <ul class="datosLibro">
+                        <a id="Dtitulo" href="{% url 'detalleLibro' libro.isbn %}">
+                            <li class="datosLibro" >
+                                <strong>{{libro.titulo}}</strong> 
+                            </li>
+                        </a>
+                        <li class="datosLibro"> {{libro.autor}} </li>
+                        <li class="datosLibro" id="Dprecio"> <strong>{{libro.precio}} €</strong></li>
+                    </ul>  
+                </section>
+            </div>
+
+            {% else %}
+            <div class="muestraLibros">
+                <a href="{% url 'detalleLibro' libro.isbn %}">
+                    <div>   
+                        <p>Sin imagen</p>             
+                    </div>
+                </a>
+                <section class="libros_letras">
+                    <ul class="datosLibro">
+                        <a id="Dtitulo" href="{% url 'detalleLibro' libro.isbn %}">
+                            <li class="datosLibro" >
+                                <strong>{{libro.titulo}}</strong> 
+                            </li>
+                        </a>
+                        <li class="datosLibro"> {{libro.autor}} </li>
+                        <li class="datosLibro" id="Dprecio"> <strong>{{libro.precio}} €</strong></li>
+                    </ul>  
+                </section>
+            </div>
+            {% endif %}
+        {% endfor %} 
+        </article> 
+
+
+</main>
+{%endblock%}

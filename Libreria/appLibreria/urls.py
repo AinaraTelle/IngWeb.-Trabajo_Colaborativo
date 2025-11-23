@@ -15,6 +15,7 @@ urlpatterns = [
     path('genero/', views.generoTodosLibros, name='generoTodosLibros'),
 
     path('precios/',views.precioTodosLibros, name='precioTodosLibros'),
+    path('autores/',views.busqueda_autor, name='busqueda_autores'),
 
     path('precio/<str:precio_libro>/', views.precio, name='precio'), #PD: en python no existen comas "," el precio seria 20.95 por ejemplo en vez de 20,95
     path('backapp/', views.masCortos,name='masCortos' ),
