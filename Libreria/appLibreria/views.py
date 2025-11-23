@@ -23,7 +23,7 @@ def genero(request, genero_libro):
 
 def generoTodosLibros(request):
     try:
-        Libros = models.Libro.objects.all()#Filtramos todos los libros del genero que se ha escogido y los guardamos en Libros
+        Libros = models.Libro.objects.all()
         context = { #Creamos contexto, que se la pasaremos a la HTML para que sepa el contenido de cada variable
             'Libros':  Libros, #Lista de objetos "libro"
         }
@@ -61,6 +61,16 @@ def precio(request, precio_libro):
     
     return render(request, 'precio.html',context)
     #return HttpResponse("Precio de libro %f" %precio_lib)
+
+def precioTodosLibros(request):
+    try:
+        Libros = models.Libro.objects.all()
+        context = { #Creamos contexto, que se la pasaremos a la HTML para que sepa el contenido de cada variable
+            'Libros':  Libros, #Lista de objetos "libro"
+        }
+    except models.Libro.DoesNotExist:#Pagina personalizada del error
+        raise Http404("No hay ningun libro de dicho genero")
+    return render(request, 'precio.html', context) #Render se usa para crear un HTML como resuesta, por decirlo simple, y le pasamos lo que necesita para funcionar
 
 def masCortos(request):
     try: 

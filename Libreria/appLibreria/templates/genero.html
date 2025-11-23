@@ -3,7 +3,7 @@
 
 {% block main %}
     <main>
-        <section class="elegirGenero">
+        <nav class="elegirGenero">
             <a href="{% url 'genA' %}" class="eleccionGenero">
                 <div>Accion</div>
             </a>
@@ -16,41 +16,32 @@
             <a href="{% url 'genH' %}" class="eleccionGenero">
                 <div> Historia</div>
             </a>
-        </section>
+        </nav>
 
         <h3 >
             A continuación se muestran los libros de {{Genero}}:
         </h3>
          
-         <!-- <article class="div_ListaLibros">
-        {% for libro in Libros %}
-            <div class="muestraLibros">
-                <ul class="datosLibro;" >
-                    <li class="datosLibro"> {{libro.titulo}} </li>
-                    <li class="datosLibro"> {{libro.autor}} </li>
-                    <li class="datosLibro"> {{libro.precio}} </li>
-                </ul>
-            </div>   
-        {% endfor %}
-        </article>   -->
-
         <article class="div_ListaLibros">
         {% for libro in Libros %}
             {% if libro.imagen %}
-            <a class="muestraLibros" href="{% url 'detalleLibro' libro.isbn %}">
-                <div class="fondo_libros"
-                style="background-image: url('{{libro.imagen.url}}');
-                border: 1px solid #c1ab9c;"> 
-                </div>
-           
-                <div class="libros_letras">
+            <div class="muestraLibros">
+                <a href="{% url 'detalleLibro' libro.isbn %}">
+                    <img class="fondo_libros" src="{{libro.imagen.url}}" alt="Sin imagen">
+                </a>
+                <section class="libros_letras">
                     <ul class="datosLibro">
-                        <li class="datosLibro" id="Dtituto"> <strong>{{libro.titulo}}</strong> </li>
-                        <li class="datosLibro" id="Dautor"> {{libro.autor}} </li>
+                        <a id="Dtitulo" href="{% url 'detalleLibro' libro.isbn %}">
+                            <li class="datosLibro" >
+                                <strong>{{libro.titulo}}</strong> 
+                            </li>
+                        </a>
+                        <li class="datosLibro"> {{libro.autor}} </li>
                         <li class="datosLibro" id="Dprecio"> <strong>{{libro.precio}} €</strong></li>
                     </ul>  
-                </div>
-            </a>
+                </section>
+            </div>
+
             {% else %}
             <div class="muestraLibros">
                 <a href="{% url 'detalleLibro' libro.isbn %}">
@@ -58,13 +49,17 @@
                         <p>Sin imagen</p>             
                     </div>
                 </a>
-                <div class="libros_letras">
+                <section class="libros_letras">
                     <ul class="datosLibro">
-                        <li class="datosLibro"> <strong>{{libro.titulo}}</strong> </li>
+                        <a id="Dtitulo" href="{% url 'detalleLibro' libro.isbn %}">
+                            <li class="datosLibro" >
+                                <strong>{{libro.titulo}}</strong> 
+                            </li>
+                        </a>
                         <li class="datosLibro"> {{libro.autor}} </li>
                         <li class="datosLibro" id="Dprecio"> <strong>{{libro.precio}} €</strong></li>
                     </ul>  
-                </div>
+                </section>
             </div>
             {% endif %}
         {% endfor %} 

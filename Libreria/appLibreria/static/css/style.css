@@ -66,12 +66,12 @@ body {
 }
 
 .fondo_libros{
-    width: auto;
-    height: auto;
+    width: 100%;
+    height: 100%;
     justify-content: left;
     align-items: center;
-    
-    background-size: cover; 
+    object-fit: cover;
+    border: 1px solid #d7c6bb;
 }
 
 .libros_letras{
@@ -109,18 +109,13 @@ main{
     align-items: center;
 }
 
-.divDatosLibro{
-    display: flex;
-    flex-direction: column;
-    padding: 0;
-    gap: 0;
-    border: 1px solid green;
-}
 .datosLibro {
     justify-content: center;
     align-items: center;
+
     padding-top: 0px;
     list-style-type: none;
+
     padding-left: 2px;
     margin-right: 2px;
     color:#1a0d07;
@@ -138,10 +133,9 @@ main{
     font-size: 20px;
     text-align: center;
 }
-#Dprecio{
-    color: #8d3800;
-    font-size: 20px;
-    text-align: center;
+#Dtitulo{
+    text-decoration: none;
+    font-size: 17px;
 }
 
 .elegirGenero{

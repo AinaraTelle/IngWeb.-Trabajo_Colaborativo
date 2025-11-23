@@ -3,16 +3,48 @@
 {% block main %}
 <h2>Filtro de libros menores de {{Prec_lib}} euros:</h2>
    
-<main class="main_ListaLibros">
+
+<article class="div_ListaLibros">
     {% for libro in Libros %}
+        {% if libro.imagen %}
         <div class="muestraLibros">
-            <ul>
-                <li> {{libro.titulo}} </li>
-                <li> {{libro.autor}} </li>
-                <li> {{libro.precio}} </li>
-            </ul>
-        </div>   
+            <a href="{% url 'detalleLibro' libro.isbn %}">
+                <img class="fondo_libros" src="{{libro.imagen.url}}" alt="Sin imagen">
+            </a>
+            <section class="libros_letras">
+                <ul class="datosLibro">
+                    <a id="Dtitulo" href="{% url 'detalleLibro' libro.isbn %}">
+                        <li class="datosLibro" >
+                            <strong>{{libro.titulo}}</strong> 
+                        </li>
+                    </a>
+                    <li class="datosLibro"> {{libro.autor}} </li>
+                    <li class="datosLibro" id="Dprecio"> <strong>{{libro.precio}} €</strong></li>
+                </ul>  
+            </section>
+        </div>
+
+        {% else %}
+        <div class="muestraLibros">
+            <a href="{% url 'detalleLibro' libro.isbn %}">
+                <div>   
+                    <p>Sin imagen</p>             
+                </div>
+            </a>
+            <section class="libros_letras">
+                <ul class="datosLibro">
+                    <a id="Dtitulo" href="{% url 'detalleLibro' libro.isbn %}">
+                        <li class="datosLibro" >
+                            <strong>{{libro.titulo}}</strong> 
+                        </li>
+                    </a>
+                    <li class="datosLibro"> {{libro.autor}} </li>
+                    <li class="datosLibro" id="Dprecio"> <strong>{{libro.precio}} €</strong></li>
+                </ul>  
+            </section>
+        </div>
+        {% endif %}
     {% endfor %} 
-</main>
+    </article> 
      
 {% endblock %}
