@@ -32,14 +32,33 @@
             
         </div>
     {% else %}
-        <ul>
-            <li><strong>Titulo: </strong> {{libro.titulo}}</li>
-            <li><strong>Precio: </strong> {{libro.precio}} €</li>
-            <li><strong>Num paginas: </strong> {{libro.num_paginas}} </li>
-            <li><strong>Autor: </strong> {{libro.autor}}</li>
-            <li><strong>En stock: </strong> {{libro.stock}}</li>
-            <h3>Descripción:</h3>
-            <p>{{libro.descripcion}}</p>
-        </ul>
+        <div style="display: flex; font-size: 20px;">
+            <div class="muestra_libros_detalles">
+                <!--Sin imagen-->
+            </div>
+            
+            <div>
+                <ul>
+                    <li><strong>Titulo: </strong> {{libro.titulo}}</li>
+                    <li><strong>Precio: </strong> {{libro.precio}} €</li>
+                    <li><strong>Num paginas: </strong> {{libro.num_paginas}}</li>
+                    <li><strong>Autor: </strong> {{libro.autor}}</li>
+                    <li><strong>Stock: </strong> {{libro.stock}}</li>
+                    <h3>Descripción:</h3>
+                    <p>{{libro.descripcion}}</p>
+                </ul>
+                <div style="display: flex; padding: 2px;"> <!--Recuerda que aqui has puesti el fondo verde, pero en la calls tambien hay otro fondo puesto, cuidado-->
+                    <a class="botonHeader" href="{% url 'antiguedad' %}" style=" background-color: green; color: black;">
+                        <div>Volver a Home</div>
+                    </a>
+                    <!--Tengo que cambiar el estilo de los botones, la verdad es que es un poco feo y el codigo es un poco meh-->
+                    <a class="botonHeader" href="{% url 'antiguedad' %}" style=" background-color: green; color: black;"> 
+                        <div>Añadir al carrito</div>
+                    </a>
+                </div>
+                
+            </div>
+            
+        </div>
     {% endif %}
 {% endblock %}
