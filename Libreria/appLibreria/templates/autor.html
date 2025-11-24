@@ -1,16 +1,18 @@
 {% extends "base.html"%}
 {%block title%}Autores{%endblock%}
 {%block main%}
-<main>
-    <h2>Seleccione el autor:</h2>
-    <br>
 
-    {%for autor in autores%}
-    <form method="get">
-        <input type="hidden" name="autor_seleccionado" value="{{ autor.id }}">
-        <button type="submit">{{ autor.nombre }}</button>
-    </form>
-    {% endfor %}
+<h2 id="autorTexto">Seleccione el autor:</h2>
+<main class="autorespagina">
+    
+    <aside class="agrupadorAutores">
+        {%for autor in autores%}
+        <form method="get">
+            <input type="hidden" name="autor_seleccionado" value="{{ autor.id }}">
+            <button class="botAutor" type="submit">{{ autor.nombre }}</button>
+        </form>
+        {% endfor %}
+    </aside>
 
     <article class="div_ListaLibros">
         {% for libro in libros %}

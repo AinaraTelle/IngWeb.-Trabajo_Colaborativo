@@ -5,7 +5,6 @@ urlpatterns = [
     path('', views.portadaYAntiguedad, name='antiguedad'), 
     path('index/', views.index, name='index'),
 
-    # path('genero/<str:genero_libro>/', views.genero, name='genero'),#H = historico, R = romance, A = acción, F = fantasia enel buscador poner las letras solas, no las palabras, asi esta en la BD
     path('genero/<str:genero_libro>/', views.genero, name='genero'),#H = historico, R = romance, A = acción, F = fantasia enel buscador poner las letras solas, no las palabras, asi esta en la BD
     
     path('genero/H/', views.genero, name='genH'),
@@ -14,10 +13,13 @@ urlpatterns = [
     path('genero/R/', views.genero, name='genR'),
     path('genero/', views.generoTodosLibros, name='generoTodosLibros'),
 
-    path('precios/',views.precioTodosLibros, name='precioTodosLibros'),
     path('autores/',views.busqueda_autor, name='busqueda_autores'),
 
-    path('precio/<str:precio_libro>/', views.precio, name='precio'), #PD: en python no existen comas "," el precio seria 20.95 por ejemplo en vez de 20,95
+    path('precio/',views.precioTodosLibros, name='precioTodosLibros'),
+    # path('precio/<int:precio_max>/', views.librosPorPrecio, name='librosPorPrecio'), #PD: en python no existen comas "," el precio seria 20.95 por ejemplo en vez de 20,95
+    path('precio/', views.librosPorPrecio, name='librosPorPrecio'), 
+
+
     path('backapp/', views.masCortos,name='masCortos' ),
     path('detalles/<str:isbn_sel>', views.detalles_libro, name='detalleLibro')
 ]

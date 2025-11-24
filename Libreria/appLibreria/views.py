@@ -7,6 +7,7 @@ from appLibreria import models #importamos la tabla de models para poder trabaja
 def index(request):
     return HttpResponse("Hello, world!")
 
+
 def genero(request, genero_libro):
     try:
         Libros = models.Libro.objects.filter(genero=genero_libro)#Filtramos todos los libros del genero que se ha escogido y los guardamos en Libros
@@ -19,7 +20,6 @@ def genero(request, genero_libro):
         raise Http404("No hay ningun libro de dicho genero")
     return render(request, 'genero.html', context) #Render se usa para crear un HTML como resuesta, por decirlo simple, y le pasamos lo que necesita para funcionar
         #return HttpResponse("Consultando genero del libro %s." %genero_libro)
-
 
 def generoTodosLibros(request):
     try:
@@ -40,27 +40,11 @@ def portadaYAntiguedad(request): #devuelve la portada tambien pero no he encontr
 
     return render(request, 'home.html', context)
 
+
 def detalles_libro(request, isbn_sel):
     Libro = models.Libro.objects.get(isbn=isbn_sel)#Obtenemos el libro cuyo isbn es el mismo que el que qeremos ver detallado
 
     return render(request, 'detalles.html', {'libro': Libro})#Esta forma de pasarle "Libro" es la misma de siempre pero sin meterlo todo en una variable
-
-def precio(request, precio_libro):
-    try:
-        precio_lib = Decimal(precio_libro)
-        Libros=models.Libro.objects.filter(precio__lt=precio_lib) #<= no permitido
-        context = {
-            'Libros': Libros,
-            'Prec_lib': precio_lib
-        }
-        print("precio: " + precio_libro)
-        print(precio_lib)
-        print(Libros)
-    except models.Libro.DoesNotExist:#Pagina personalizada del error
-        raise Http404("No hay ningun libro de dicho precio o menor")
-    
-    return render(request, 'precio.html',context)
-    #return HttpResponse("Precio de libro %f" %precio_lib)
 
 def precioTodosLibros(request):
     try:
@@ -71,6 +55,21 @@ def precioTodosLibros(request):
     except models.Libro.DoesNotExist:#Pagina personalizada del error
         raise Http404("No hay ningun libro de dicho genero")
     return render(request, 'precio.html', context) #Render se usa para crear un HTML como resuesta, por decirlo simple, y le pasamos lo que necesita para funcionar
+
+def librosPorPrecio(request):
+    try:
+        precio_maxV=request.GET.get('precio_max')
+        precio_max=Decimal(precio_maxV)
+        Libros=models.Libro.objects.filter(precio__lt=precio_max) #<= no permitido
+        context = {
+            'Libros': Libros,
+            'precio_libro': precio_max
+        }
+    except models.Libro.DoesNotExist:#Pagina personalizada del error
+        raise Http404("No hay ningun libro de dicho precio o menor")
+    
+    return render(request, 'precio.html',context)
+
 
 def masCortos(request):
     try: 
@@ -83,7 +82,7 @@ def masCortos(request):
     return render(request, 'inicio_novedades.html', context)
 
 def busqueda_autor(request):
-    autores=models.Autor.objects.all()
+    autores=models.Autor.objects.all().order_by("nombre")
     autorbuscado_id=request.GET.get('autor_seleccionado')
     if autorbuscado_id:#Si hay alguna id seleccionada
         autorbuscado_id=int(autorbuscado_id)

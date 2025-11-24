@@ -3,6 +3,11 @@
 {% block main %}
 <h2>Filtro de libros menores de {{Prec_lib}} euros:</h2>
    
+<form id="formPrecio" method="get" >
+    <label for="precio_max">Indica un precio máximo:</label>
+    <input id="inputPrecio" type="number" name="precio_max">
+    <button id="buttonPrecio" type="submit"> Buscar por precio</button>
+</form>
 
 <article class="div_ListaLibros">
     {% for libro in Libros %}
