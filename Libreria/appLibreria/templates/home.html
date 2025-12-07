@@ -4,6 +4,13 @@
 {% block main %}
     <main>
         <h2 class="titulos_h2">Algunos libros de nuestra colección:</h2>
+        </br><!--Aquí deberia ir el bloque de libros novedosos-->
+        <h2 class="titulos_h2">Si lo prefieres, tambien puedes utilizar el buscador para encontrar un libro que deseas:</h2><!--Buscador-->
+        <form id="Buscador-libros" action="POST" style="text-align: center;">
+            <input id="input-busc" type="text" name="buscador">
+            <input id="BTN-mandar" type="submit">
+        </form>
+
         </br>
         <article class="div_ListaLibros">
             {% for libro in Libros %}
