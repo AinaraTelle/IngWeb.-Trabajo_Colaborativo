@@ -2,6 +2,7 @@ from decimal import Decimal
 from django.shortcuts import render
 from django.http import HttpResponse, Http404 
 from appLibreria import models #importamos la tabla de models para poder trabajar con los datos de la BD
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def index(request):
@@ -95,3 +96,17 @@ def busqueda_autor(request):
         'libros':libros
     }
     return render(request, 'autor.html', context)
+
+
+
+@login_required
+def ver_carrito(request):
+    carrito ,creado = models.Carrito.objects.get_or_create(usuario=request.user)# Esta con coma ya que aqui se crea el carrito una vez que el usuario accede por primera vez o detecta si esta creadp, por lo tanto el carrito sería el tipo de item y el creado es true o false
+    
+    context = {
+        'usuario': request.user,
+        'carrito': carrito,
+        'libros': carrito.libros.all(),
+        'total': carrito.total
+    }
+    return render(request, "carrito.html", context)
