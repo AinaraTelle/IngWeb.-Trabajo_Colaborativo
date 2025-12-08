@@ -22,9 +22,7 @@
                     <section class="libros_letras">
                         <ul class="datosLibro">
                             <a id="Dtitulo" href="{% url 'detalleLibro' libro.isbn %}"> <!--¿Se puede poner un ID aquí?-->
-                                <li class="datosLibro" >
-                                    <strong>{{libro.titulo}}</strong> 
-                                </li>
+                                <li class="datosLibro" id="tit_libro_Si"><strong>{{libro.titulo}}</strong></li>
                             </a>
                             <li class="datosLibro"> {{libro.autor}} </li>
                             <li class="datosLibro" id="Dprecio"> <strong>{{libro.precio}} €</strong></li>
@@ -41,9 +39,7 @@
                     <section class="libros_letras">
                         <ul class="datosLibro">
                             <a id="Dtitulo" href="{% url 'detalleLibro' libro.isbn %}">
-                                <li class="datosLibro" >
-                                    <strong>{{libro.titulo}}</strong> 
-                                </li>
+                                <li class="datosLibro" id="tit_libro_No" ><strong>{{libro.titulo}}</strong></li>
                             </a>
                             <li class="datosLibro"> {{libro.autor}} </li>
                             <li class="datosLibro" id="Dprecio"> <strong>{{libro.precio}} €</strong></li>
@@ -53,5 +49,52 @@
                 {% endif %}
             {% endfor %} 
         </article> 
+
+        <script>
+            function soloBuscados(event){//MUCHO CUIDADO: si en el html hay algun espacio de sobra en la etiqueta que quieres comparar para hacer el buscador, al coger el texto para comprobar tambien lo cogera, a mi me ha pasado tener cuidado
+                event.preventDefault();//Por si acaso
+
+                let txtBuscado = document.getElementById('input-busc');
+                let texto =  txtBuscado.value;
+                let Libros = document.getElementsByClassName("muestraLibros");//Div de la lista de libros
+                //let Libros0 = document.getElementsByClassName("muestraLibros");//Div de la lista de libros
+                alert(texto);
+
+                //Libros0.forEach(element => {
+                //    element.style.display = "block";
+                //});
+
+                
+                //Tengo que coger la lista y modificarla:
+                for (let libro of Libros){
+                    let libroSI = libro.querySelector('#tit_libro_Si');
+                    let libroNO = libro.querySelector('#tit_libro_No');
+
+                    if (libroSI != null){
+                        if(texto != libroSI.textContent){
+                            libro.style.display = "none";
+                            //alert("Titulo:" + texto + " / " + libroSI.textContent); //Esto es para ver si algo iba mal o no
+                        };
+                    };
+                    
+                    if(libroNO != null){
+                        if(texto != libroNO.textContent){
+                            libro.style.display = "none";
+                            //alert("Titulo:" + texto + " / " + libroNO.textContent);
+                        };
+                    };//Hay que añadir que al terminar se vuelva a poner todo en display block, sino permanece oculto al volver a buscar
+                    
+
+                };
+                 
+            };
+            
+            
+            const BTN = document.getElementById('BTN-mandar');
+
+            BTN.addEventListener('click', function(event){
+                soloBuscados(event);
+            });
+        </script>
     </main>
 {% endblock %}
