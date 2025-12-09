@@ -1,5 +1,6 @@
 from decimal import Decimal
-from django.shortcuts import render
+from pyexpat.errors import messages
+from django.shortcuts import redirect, render
 from django.http import HttpResponse, Http404 
 from appLibreria import models #importamos la tabla de models para poder trabajar con los datos de la BD
 from django.contrib.auth.decorators import login_required
@@ -102,11 +103,29 @@ def busqueda_autor(request):
 @login_required
 def ver_carrito(request):
     carrito ,creado = models.Carrito.objects.get_or_create(usuario=request.user)# Esta con coma ya que aqui se crea el carrito una vez que el usuario accede por primera vez o detecta si esta creadp, por lo tanto el carrito sería el tipo de item y el creado es true o false
-    
+    items=carrito.items.all()#Obtenemos los libros con su precio y la cantidad de los mismos
     context = {
         'usuario': request.user,
         'carrito': carrito,
-        'libros': carrito.libros.all(),
+        'items':items,
         'total': carrito.total
     }
     return render(request, "carrito.html", context)
+
+
+def comprar(request):#Basicamente existe para actualizar la existencias de libros
+    carrito=models.Carrito.objects.get(usuario=request.user)
+    for item in carrito.items.all():
+        libro = item.libro
+
+        if libro.stock >= item.cantidad:
+            libro.stock -= item.cantidad  
+            libro.save()#Actualiza stock
+        else:
+            messages.error(request, f"No hay suficiente stock de {libro.titulo}")
+            return redirect('ver_carrito')
+
+    
+    carrito.items.all().delete()#Vacia el carrito despues de la compra
+    messages.success(request, "Compra realizada correctamente")
+    return redirect('')  # Una vez terminada la compra se redirige a inicio

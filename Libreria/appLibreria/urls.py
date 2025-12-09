@@ -23,5 +23,6 @@ urlpatterns = [
     path('backapp/', views.masCortos,name='masCortos' ),
     path('detalles/<str:isbn_sel>', views.detalles_libro, name='detalleLibro'),
 
-    path('carrito/', views.ver_carrito, name='ver_carrito')
+    path('carrito/', views.ver_carrito, name='ver_carrito'),
+    path('carrito/comprar/', views.comprar, name='comprar'),
 ]

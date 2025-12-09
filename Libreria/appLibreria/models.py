@@ -50,7 +50,7 @@ class Carrito(models.Model):
         return f"Carrito de {self.usuario.username} ({self.items.count()} libros)"
 
 class CarritoItem(models.Model):
-    carrito = models.ForeignKey('Carrito', related_name='items', on_delete=models.CASCADE)
+    carrito = models.ForeignKey('Carrito', related_name='items', on_delete=models.CASCADE)#Para invocar los libros que contiene el carrito utilizamos items
     libro = models.ForeignKey(Libro, on_delete=models.CASCADE)
     cantidad = models.PositiveIntegerField(default=1)
     
