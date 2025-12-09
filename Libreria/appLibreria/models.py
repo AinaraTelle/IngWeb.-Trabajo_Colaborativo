@@ -43,12 +43,16 @@ class Libro(models.Model):
 
 class Carrito(models.Model):
     usuario=models.OneToOneField(User, on_delete=models.CASCADE)
-    libros = models.ManyToManyField(Libro)
     @property
     def total(self):
-        return sum(libro.precio for libro in self.libros.all()) #EN vez de atributo es funcion, mas exacto y mas facil de utilizar
+        return sum(item.libro.precio * item.cantidad for item in self.items.all()) #EN vez de atributo es funcion, mas exacto y mas facil de utilizar
     def __str__(self):
-        return f"Carrito de {self.usuario.username} ({self.libros.count()} libros)"
+        return f"Carrito de {self.usuario.username} ({self.items.count()} libros)"
+
+class CarritoItem(models.Model):
+    carrito = models.ForeignKey('Carrito', related_name='items', on_delete=models.CASCADE)
+    libro = models.ForeignKey(Libro, on_delete=models.CASCADE)
+    cantidad = models.PositiveIntegerField(default=1)
     
 
 
