@@ -61,7 +61,7 @@
                 //alert(texto);
 
                 for (let libro of Libros) {
-                    libro.style.display = "block";
+                    libro.style.display = "grid";
 
                     //let libroSI = libro.querySelector('#tit_libro_Si');
                     //let libroNO = libro.querySelector('#tit_libro_No');
@@ -76,14 +76,14 @@
                     let libroNO = libro.querySelector('#tit_libro_No');
 
                     if (libroSI != null){
-                        if(texto != libroSI.textContent){
+                        if(texto.toLowerCase() != libroSI.textContent.toLowerCase()){
                             libro.style.display = "none";
                             //alert("Titulo:" + texto + " / " + libroSI.textContent); //Esto es para ver si algo iba mal o no
                         };
                     };
                     
                     if(libroNO != null){
-                        if(texto != libroNO.textContent){
+                        if(texto.toLowerCase() != libroNO.textContent.toLocaleLowerCase()){
                             libro.style.display = "none";
                             //alert("Titulo:" + texto + " / " + libroNO.textContent);
                         };
