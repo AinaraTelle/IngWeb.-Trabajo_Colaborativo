@@ -49,6 +49,22 @@ body {
     padding: 20px;
 }
 
+.botonesDetalles{
+    display: inline-block;
+    
+    width: 175px;
+
+    text-decoration: none;
+    text-align: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+    background-color:white;
+    border: solid 2px #7a4420;
+    border-radius: 12px;
+    color:black;
+    padding: 20px;
+}
+
 .muestraLibros{
     width: 180px;
     height: 380px;
