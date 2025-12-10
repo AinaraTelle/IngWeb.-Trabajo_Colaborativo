@@ -58,11 +58,16 @@
                 let texto =  txtBuscado.value;
                 let Libros = document.getElementsByClassName("muestraLibros");//Div de la lista de libros
                 //let Libros0 = document.getElementsByClassName("muestraLibros");//Div de la lista de libros
-                alert(texto);
+                //alert(texto);
 
-                //Libros0.forEach(element => {
-                //    element.style.display = "block";
-                //});
+                for (let libro of Libros) {
+                    libro.style.display = "block";
+
+                    //let libroSI = libro.querySelector('#tit_libro_Si');
+                    //let libroNO = libro.querySelector('#tit_libro_No');
+
+                    
+                };
 
                 
                 //Tengo que coger la lista y modificarla:
