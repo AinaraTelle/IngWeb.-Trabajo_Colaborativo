@@ -2,7 +2,7 @@
 {% block titleXD %} Detalles {% endblock %}
 {% block main %}
     {% if libro.imagen %}<!--Aqui puedo usar la forma esa de utilizar "for" para mostrar todos los atributos de algo que le pases-->
-        <div style="display: flex; font-size: 20px; margin-left: 30px; margin-right: 30px;">
+        <div id="detalles_mainDIV">
             <div class="muestra_libros_detalles">
                 <img src="{{libro.imagen.url}}" alt="No hay foto del libro en este momento" 
                 style="width: 300px; height: 450px;"><!--Le pasamos la URL del libro en cuestion-->

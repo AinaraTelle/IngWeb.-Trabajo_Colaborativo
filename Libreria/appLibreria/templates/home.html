@@ -10,38 +10,38 @@
             {% for libro in Libros %}
                 {% if libro.fecha_publicacion|date:"Y" >= "2022" %}
                     {% if libro.imagen %}
-                <div class="muestraLibros">
-                    <a href="{% url 'detalleLibro' libro.isbn %}">
-                        <img class="fondo_libros" src="{{libro.imagen.url}}" alt="Sin imagen">
-                    </a>
-                    <section class="libros_letras">
-                        <ul class="datosLibro">
-                            <a id="Dtitulo" href="{% url 'detalleLibro' libro.isbn %}"> <!--¿Se puede poner un ID aquí?-->
-                                <li class="datosLibro" id="tit_libro_Si"><strong>{{libro.titulo}}</strong></li>
-                            </a>
-                            <li class="datosLibro"> {{libro.autor}} </li>
-                            <li class="datosLibro" id="Dprecio"> <strong>{{libro.precio}} €</strong></li>
-                        </ul>  
-                    </section>
-                </div>
-                {% else %}
-                <div class="muestraLibros">
-                    <a href="{% url 'detalleLibro' libro.isbn %}">
-                        <div>   
-                            <p>Sin imagen</p>             
-                        </div>
-                    </a>
-                    <section class="libros_letras">
-                        <ul class="datosLibro">
-                            <a id="Dtitulo" href="{% url 'detalleLibro' libro.isbn %}">
-                                <li class="datosLibro" id="tit_libro_No" ><strong>{{libro.titulo}}</strong></li>
-                            </a>
-                            <li class="datosLibro"> {{libro.autor}} </li>
-                            <li class="datosLibro" id="Dprecio"> <strong>{{libro.precio}} €</strong></li>
-                        </ul>  
-                    </section>
-                </div>
-                {% endif %}
+                    <div class="muestraLibros">
+                        <a href="{% url 'detalleLibro' libro.isbn %}">
+                            <img class="fondo_libros" src="{{libro.imagen.url}}" alt="Sin imagen">
+                        </a>
+                        <section class="libros_letras">
+                            <ul class="datosLibro">
+                                <a id="Dtitulo" href="{% url 'detalleLibro' libro.isbn %}">
+                                    <li class="datosLibro" id="tit_libro_Si"><strong>{{libro.titulo}}</strong></li>
+                                </a>
+                                <li class="datosLibro"> {{libro.autor}} </li>
+                                <li class="datosLibro" id="Dprecio"> <strong>{{libro.precio}} €</strong></li>
+                            </ul>  
+                        </section>
+                    </div>
+                    {% else %}
+                    <div class="muestraLibros">
+                        <a href="{% url 'detalleLibro' libro.isbn %}">
+                            <div>   
+                                <p>Sin imagen</p>             
+                            </div>
+                        </a>
+                        <section class="libros_letras">
+                            <ul class="datosLibro">
+                                <a id="Dtitulo" href="{% url 'detalleLibro' libro.isbn %}">
+                                    <li class="datosLibro" id="tit_libro_No" ><strong>{{libro.titulo}}</strong></li>
+                                </a>
+                                <li class="datosLibro"> {{libro.autor}} </li>
+                                <li class="datosLibro" id="Dprecio"> <strong>{{libro.precio}} €</strong></li>
+                            </ul>  
+                        </section>
+                    </div>
+                    {% endif %}
                 {% endif %}
             {% endfor %}
         </div>
@@ -93,9 +93,9 @@
         </article> 
 
         <script>
-            function soloBuscados(event){//MUCHO CUIDADO: si en el html hay algun espacio de sobra en la etiqueta que quieres comparar para hacer el buscador, al coger el texto para comprobar tambien lo cogera, a mi me ha pasado tener cuidado
-                event.preventDefault();//Por si acaso
-
+            function soloBuscados(event){ //MUCHO CUIDADO: si en el html hay algun espacio de sobra en la etiqueta que quieres para
+                event.preventDefault();//Por si acaso                           hacer el buscador, al coger el texto para comprobar  
+//                                                                               tambien lo cogera, a mi me ha pasado tener cuidado
                 let txtBuscado = document.getElementById('input-busc');
                 let texto =  txtBuscado.value;
                 let Libros = document.getElementsByClassName("muestraLibros");//Div de la lista de libros
@@ -110,7 +110,6 @@
 
                     
                 };
-
                 
                 //Tengo que coger la lista y modificarla:
                 for (let libro of Libros){
