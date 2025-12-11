@@ -3,7 +3,7 @@
 
 {% block main %}
     <main>
-        <h2 class="titulos_h2">Algunas novedades que podrian interesarte:</h2>
+        <h2 class="titulos_h2" id="titulo_bestsellers">Algunas novedades que podrian interesarte:</h2>
         </br><!--Aquí deberia ir el bloque de libros novedosos-->
 
         <div id="Lib_novedosos">
@@ -49,6 +49,7 @@
 
         <h2 class="titulos_h2">Si lo prefieres, tambien puedes utilizar el buscador para encontrar un libro que deseas:</h2><!--Buscador-->
         <form id="Buscador-libros" action="POST" style="text-align: center;">
+            <input id="BTN-refrescar" type="submit" value="<==">
             <input id="input-busc" type="text" name="buscador">
             <input id="BTN-mandar" type="submit">
         </form>
@@ -93,22 +94,39 @@
         </article> 
 
         <script>
-            function soloBuscados(event){ //MUCHO CUIDADO: si en el html hay algun espacio de sobra en la etiqueta que quieres para
-                event.preventDefault();//Por si acaso                           hacer el buscador, al coger el texto para comprobar  
-//                                                                               tambien lo cogera, a mi me ha pasado tener cuidado
-                let txtBuscado = document.getElementById('input-busc');
-                let texto =  txtBuscado.value;
-                let Libros = document.getElementsByClassName("muestraLibros");//Div de la lista de libros
-                //let Libros0 = document.getElementsByClassName("muestraLibros");//Div de la lista de libros
-                //alert(texto);
+            function refrescar(event){
+                event.preventDefault();//Capturamos la ejecución estandar
+
+                let tit_bestsellers = document.getElementById("titulo_bestsellers");//Devolvemos todo a su estado original
+                tit_bestsellers.style.display = "grid";
+                let texto_bestsellers = document.getElementById("Lib_novedosos");
+                texto_bestsellers.style.display = "flex";
+
+                let Libros = document.getElementsByClassName("muestraLibros");
 
                 for (let libro of Libros) {
                     libro.style.display = "grid";
 
-                    //let libroSI = libro.querySelector('#tit_libro_Si');
-                    //let libroNO = libro.querySelector('#tit_libro_No');
+                };
+            };
 
-                    
+
+            function soloBuscados(event){ //MUCHO CUIDADO: si en el html hay algun espacio de sobra en la etiqueta que quieres para
+                event.preventDefault();//Por si acaso                           hacer el buscador, al coger el texto para comprobar  
+//                                                                               tambien lo cogera, a mi me ha pasado tener cuidado
+
+                let tit_bestsellers = document.getElementById("titulo_bestsellers");
+                tit_bestsellers.style.display = "none";
+                let texto_bestsellers = document.getElementById("Lib_novedosos");
+                texto_bestsellers.style.display = "none";
+
+                let txtBuscado = document.getElementById('input-busc');
+                let texto =  txtBuscado.value;
+                let Libros = document.getElementsByClassName("muestraLibros");//Div de la lista de libros
+
+                for (let libro of Libros) {
+                    libro.style.display = "grid";
+
                 };
                 
                 //Tengo que coger la lista y modificarla:
@@ -141,6 +159,13 @@
             BTN.addEventListener('click', function(event){
                 soloBuscados(event);
             });
+
+            const BTN_R = document.getElementById('BTN-refrescar');
+
+            BTN_R.addEventListener('click', function(event){
+                refrescar(event);
+            });
+
         </script>
     </main>
 {% endblock %}
