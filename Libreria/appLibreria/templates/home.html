@@ -3,8 +3,50 @@
 
 {% block main %}
     <main>
-        <h2 class="titulos_h2">Algunos libros de nuestra colección:</h2>
+        <h2 class="titulos_h2">Algunas novedades que podrian interesarte:</h2>
         </br><!--Aquí deberia ir el bloque de libros novedosos-->
+
+        <div id="Lib_novedosos">
+            {% for libro in Libros %}
+                {% if libro.fecha_publicacion|date:"Y" >= "2022" %}
+                    {% if libro.imagen %}
+                <div class="muestraLibros">
+                    <a href="{% url 'detalleLibro' libro.isbn %}">
+                        <img class="fondo_libros" src="{{libro.imagen.url}}" alt="Sin imagen">
+                    </a>
+                    <section class="libros_letras">
+                        <ul class="datosLibro">
+                            <a id="Dtitulo" href="{% url 'detalleLibro' libro.isbn %}"> <!--¿Se puede poner un ID aquí?-->
+                                <li class="datosLibro" id="tit_libro_Si"><strong>{{libro.titulo}}</strong></li>
+                            </a>
+                            <li class="datosLibro"> {{libro.autor}} </li>
+                            <li class="datosLibro" id="Dprecio"> <strong>{{libro.precio}} €</strong></li>
+                        </ul>  
+                    </section>
+                </div>
+                {% else %}
+                <div class="muestraLibros">
+                    <a href="{% url 'detalleLibro' libro.isbn %}">
+                        <div>   
+                            <p>Sin imagen</p>             
+                        </div>
+                    </a>
+                    <section class="libros_letras">
+                        <ul class="datosLibro">
+                            <a id="Dtitulo" href="{% url 'detalleLibro' libro.isbn %}">
+                                <li class="datosLibro" id="tit_libro_No" ><strong>{{libro.titulo}}</strong></li>
+                            </a>
+                            <li class="datosLibro"> {{libro.autor}} </li>
+                            <li class="datosLibro" id="Dprecio"> <strong>{{libro.precio}} €</strong></li>
+                        </ul>  
+                    </section>
+                </div>
+                {% endif %}
+                {% endif %}
+            {% endfor %}
+        </div>
+
+
         <h2 class="titulos_h2">Si lo prefieres, tambien puedes utilizar el buscador para encontrar un libro que deseas:</h2><!--Buscador-->
         <form id="Buscador-libros" action="POST" style="text-align: center;">
             <input id="input-busc" type="text" name="buscador">

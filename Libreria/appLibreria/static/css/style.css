@@ -65,6 +65,21 @@ body {
     padding: 20px;
 }
 
+#Lib_novedosos{
+    display: flex;
+    gap: 200px;
+    justify-content: center;
+
+    padding: 20px;
+
+    background-color: rgb(164, 164, 227);
+
+    border-style: solid;
+    border-color: #965538;
+    border-width: 2px;
+    border-radius: 4px;
+}
+
 .muestraLibros{
     width: 180px;
     height: 380px;
