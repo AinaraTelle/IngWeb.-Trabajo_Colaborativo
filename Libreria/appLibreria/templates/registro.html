@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>    
+    <header id="headerBase">
+        <aside class="centradoEnMedio" >
+            <img src="{% static 'imgs/Papirium_LogoCuadTxiki.png' %}" alt="Logo"
+            height=220 width=220>
+        </aside>
+        <section>
+            <h1 id="TituloPagina"><!--TENGO QUE CAMBIARLO POR EL FORM ESTO ES COMO "SERIA"-->
+               {% block titleXD %} <b>Log In </b>{% endblock %} 
+            </h1>
+            
+            <div id="escrituraDatos">  
+                <input type= "text" name="nombreUsuario" placeholder="Introduzca el nombre de usuario"> 
+
+                <input type= "email" name="emailUsuario" placeholder="Introduzca el email de usuario" > 
+
+                <input type= "password" name="contrasenya" placeholder="Introduzca la contrasenya de usuario"> 
+
+                <input type= "password" name="contrasenyaVis" placeholder="Vuelva a introducir la contrasenya"> 
+
+                <a class="botonReg" href="{% url 'generoTodosLibros' %}">
+                    <div>Crear y guardar el perfil</div>
+                </a>
+
+            </div>
+        </section>
+    </header>
+
+    {% block main %}
+    {% endblock %}
+
+</body>
+</html>

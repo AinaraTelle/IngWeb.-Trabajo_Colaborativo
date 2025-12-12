@@ -4,6 +4,8 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse, Http404 
 from appLibreria import models #importamos la tabla de models para poder trabajar con los datos de la BD
 from django.contrib.auth.decorators import login_required
+from .forms import registroFrom
+from django.contrib.auth import login
 # Create your views here.
 
 def index(request):
@@ -129,3 +131,14 @@ def comprar(request):#Basicamente existe para actualizar la existencias de libro
     carrito.items.all().delete()#Vacia el carrito despues de la compra
     messages.success(request, "Compra realizada correctamente")
     return redirect('')  # Una vez terminada la compra se redirige a inicio
+
+def registrar_usuario(request):
+    if request.method=='POST':
+        form=registroFrom
+        if form.is_valid:
+            usuario=form.save() #se guarda como usuario para acceso mas facil luego (como editar datos)
+            login(request,usuario)
+            return redirect('generoTodosLibros')
+    else:
+        form=registroFrom()
+    return render(request, 'registro.html', {'form': form})
