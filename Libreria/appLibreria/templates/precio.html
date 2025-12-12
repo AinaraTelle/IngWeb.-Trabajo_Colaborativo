@@ -4,7 +4,7 @@
 <h2>Filtro de libros menores de {{Prec_lib}} euros:</h2>
    
 <form id="formPrecio" method="get" >
-    <label for="busacdorPrecio_max">Indica un precio máximo:</label>
+    <label for="inputPrecio">Indica un precio máximo:</label>
     <input id="inputPrecio" type="number" name="precio_max">
     <button id="buttonPrecio" type="submit"> Buscar por precio</button>
 </form>
@@ -56,42 +56,51 @@
         function buscarLibrosPrecioMax(event){ //MUCHO CUIDADO: si en el html hay algun espacio de sobra en la etiqueta que quieres para
             event.preventDefault();//Por si acaso                           hacer el buscador, al coger el texto para comprobar  
 //                                                                               tambien lo cogera, a mi me ha pasado tener cuidado
-            let precioBuscado = document.getElementById('inputPrecio');
-            let precio =  txtBuscado.value;
+            let precioMax = document.getElementById('inputPrecio');
+            // let precio =  txtBuscado.value;
+            console.log(precioMax.value)
+            
             let Libros = document.getElementsByClassName("muestraLibros");//Div de la lista de libros
+            let listaLibrosBaratos = [];
 
             for (let libro of Libros) {
-                console.log(${libro.title})
+                let precio = libro.lastElementChild.firstElementChild.lastElementChild.firstElementChild.textContent;
+                            //div       section             ul              a               li
+                console.log("Precio for:"+ precioMax.value)
+                // console.log("Precio libro:"+ precio)
+                if (precio>precioMax.value){ // los caros los ocultamos
+                    console.log("oleee")
+                    // listaLibrosBaratos.push(libro)
+                    libro.style.display = "none";
+                }
             };
             
-            for (let libro of Libros){
-                let libroSI = libro.querySelector('#tit_libro_Si');
-                let libroNO = libro.querySelector('#tit_libro_No');
+            // for (let libro of Libros){
+            //     let libroSI = libro.querySelector('#tit_libro_Si');
+            //     let libroNO = libro.querySelector('#tit_libro_No');
 
-                if (libroSI != null){
-                    if(texto.toLowerCase() != libroSI.textContent.toLowerCase()){
-                        libro.style.display = "none";
-                        //alert("Titulo:" + texto + " / " + libroSI.textContent); //Esto es para ver si algo iba mal o no
-                    };
-                };
+            //     if (libroSI != null){
+            //         if(texto.toLowerCase() != libroSI.textContent.toLowerCase()){
+            //             libro.style.display = "none";
+            //             //alert("Titulo:" + texto + " / " + libroSI.textContent); //Esto es para ver si algo iba mal o no
+            //         };
+            //     };
                 
-                if(libroNO != null){
-                    if(texto.toLowerCase() != libroNO.textContent.toLocaleLowerCase()){
-                        libro.style.display = "none";
-                        //alert("Titulo:" + texto + " / " + libroNO.textContent);
-                    };
-                };//Hay que añadir que al terminar se vuelva a poner todo en display block, sino permanece oculto al volver a buscar
-                
-
-            };
+            //     if(libroNO != null){
+            //         if(texto.toLowerCase() != libroNO.textContent.toLocaleLowerCase()){
+            //             libro.style.display = "none";
+            //             //alert("Titulo:" + texto + " / " + libroNO.textContent);
+            //         };
+            //     };//Hay que añadir que al terminar se vuelva a poner todo en display block, sino permanece oculto al volver a buscar
+            // };
                 
         };
         
-        
-        const BTN = document.getElementById('BTN-mandar');
+
+        const BTN = document.getElementById('buttonPrecio');
 
         BTN.addEventListener('click', function(event){
-            soloBuscados(event);
+            buscarLibrosPrecioMax(event);
         });
     </script>
      
