@@ -274,3 +274,54 @@ main{
     font-size: 16px;
 }
 
+.carrito-contenedor {
+    width: 60%;
+    margin: 0 auto;
+}
+
+
+.titulo-carrito {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+
+.carrito-lista {
+    max-height: 250px;
+    overflow-y: auto;
+    border: 1px solid #e07b4a;
+    padding: 10px;
+}
+
+
+.carrito-item {
+    display: flex;
+    gap: 10px;
+    border-bottom: 1px solid #e07b4a;
+    padding: 8px 0;
+}
+
+
+.carrito-imagen {
+    width: 70px;      
+    height: 100px;    
+    object-fit: cover; 
+    border-radius: 5px;
+}
+
+
+.carrito-total {
+    margin-top: 15px;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: right;
+}
+
+
+.btn-comprar {
+    margin-top: 10px;
+    padding: 8px 12px;
+    border: 1px solid #000;
+    background: white;
+    cursor: pointer;
+}

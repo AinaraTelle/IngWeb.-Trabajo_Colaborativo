@@ -1,9 +1,32 @@
 {% extends "base.html"%}
-{%block title%}Carrito{%endblock%}
+{% block titleXD %}Carrito{%endblock%}
 {%block main%}
 <h2>Carrito de {{usuario.username}}</h2>
 <main>
+    <div class="carrito-contenedor">
+
+        <div class="carrito-lista">
+            {% if carrito.items.all %}
+                {% for item in carrito.items.all %}
+                <div class="carrito-item">
     
+                    <img class="carrito-imagen" 
+                         src="{{ item.libro.imagen.url }}" 
+                         alt="{{ item.libro.titulo }}">
+    
+                    <div class="carrito-info">
+                        <h3>{{ item.libro.titulo }}</h3>
+                        <p>Autor: {{ item.libro.autor.nombre }}</p>
+                        <p class="precio">Precio: {{ item.libro.precio }} €</p>
+                        <p>Cantidad: {{ item.cantidad }}</p>
+                    </div>
+    
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>No tienes libros en el carrito.</p>
+            {% endif %}
+        </div>
 </main>
 
 {%endblock%}
