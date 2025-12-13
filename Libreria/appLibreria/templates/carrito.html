@@ -28,6 +28,10 @@
             {% endif %}
         </div>
         <h3>Precio Total: {{carrito.total}} €</h3>
+        <form action="%url 'comprar'%">
+            {%csrf_token%}
+            <button type="submit">comprar</button>
+        </form>
 </main>
 
 {%endblock%}
