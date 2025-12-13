@@ -11,32 +11,17 @@
     <button id="buttonRefrescar" type="submit"> Refrescar</button>
 </form>
 
-<article class="div_ListaLibros">
+<article id="mainPrecio" class="div_ListaLibros">
     {% for libro in Libros %}
-        {% if libro.imagen %}
         <div class="muestraLibros">
             <a href="{% url 'detalleLibro' libro.isbn %}">
+            {% if libro.imagen %}
                 <img class="fondo_libros" src="{{libro.imagen.url}}" alt="Sin imagen">
-            </a>
-            <section class="libros_letras">
-                <ul class="datosLibro">
-                    <a id="Dtitulo" href="{% url 'detalleLibro' libro.isbn %}">
-                        <li class="datosLibro" >
-                            <strong>{{libro.titulo}}</strong> 
-                        </li>
-                    </a>
-                    <li class="datosLibro"> {{libro.autor}} </li>
-                    <li class="datosLibro" id="Dprecio"> <strong>{{libro.precio}} €</strong></li>
-                </ul>  
-            </section>
-        </div>
-
-        {% else %}
-        <div class="muestraLibros">
-            <a href="{% url 'detalleLibro' libro.isbn %}">
+            {% else %} 
                 <div>   
                     <p>Sin imagen</p>             
                 </div>
+            {% endif %}
             </a>
             <section class="libros_letras">
                 <ul class="datosLibro">
@@ -50,8 +35,8 @@
                 </ul>  
             </section>
         </div>
-        {% endif %}
-    {% endfor %} 
+    {% endfor %}
+
     </article>
     
     <script>
@@ -74,16 +59,29 @@
                     libro.style.display = "grid";
                 }
             };
+        // CODIGO PARA QUE SALGA "NO HAY LIBROS" cuando no haya ni uno
+        //     let sinLibros = false
+        //     let nuevoDIV = document.createElement("div");
+        //     nuevoDIV.innerHTML = "<h3> No hay libros disponibles</h3>";
+            
+        //     let mainPrecio =  document.getElementById("mainPrecio");
+        //     let padreDeMainPrecio = mainPrecio.parentNode;
+        //     padreDeMainPrecio.insertBefore(nuevoDIV, mainPrecio);
+        //     nuevoDIV.style.display = "grid"
 
-            // for (let libro of Libros){
-            //     if(libro.style.display == "none"){
-            //         let nuevoDIV = document.createElement("div");
-            //         nuevoDIV.innerHTML = "<h3> No hay libros disponibles</h3>";
-            //     }
-            //     else{
-
-            //     }
-            // }
+        //     for (let libro of Libros){
+        //         if(libro.style.display != "none"){
+        //             sinLibros =true
+        //         }
+        //         else{
+        //             sinLibros =false
+        //         }
+        //     }
+        //     if(sinLibros){
+        //         nuevoDIV.style.display = "grid"
+        //     }else{
+        //         nuevoDIV.style.display = "none"
+        //     }
         };
 
         function refrescarLibros(event){
@@ -109,6 +107,12 @@
 
         BtnRefrescar.addEventListener('click', function(event){
             refrescarLibros(event);
+        });
+        BtnRefrescar.addEventListener('mousemove', function(event){
+            BtnRefrescar.style.backgroundColor="#dbc5b5";
+        });
+        BtnRefrescar.addEventListener('mouseout', function(event){
+            BtnRefrescar.style.backgroundColor="#fbede3";
         });
 
 
