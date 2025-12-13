@@ -7,4 +7,6 @@ class registroFrom(UserCreationForm):
     email=forms.EmailField(required= True,label="Introduzca su email")
     class Meta:
         model=User
-        fields= ['nombre', 'email', 'contrasenya', 'contrasenyaVis']
+        # fields= ['nombre', 'email', 'contrasenya', 'contrasenyaVis'] #esto era lo que estaba antes. Pero el programa no ejecuta
+        
+        fields= UserCreationForm.Meta.fields  # con esto, el programa sí ejecuta

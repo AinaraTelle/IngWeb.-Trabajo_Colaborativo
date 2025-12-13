@@ -4,19 +4,18 @@
 {% block main %}
     <main>
         <nav class="elegirGenero">
-            <a onclick="style.backgroundColor = '#fff9f6';" 
-            href="{% url 'genA' %}" class="eleccionGenero">
+            <a id="bA" href="{% url 'genA' %}" class="eleccionGenero">
                 <div>Accion</div>
             </a>
-            <a onclick="style.backgroundColor = '#fff9f6';" 
+            <a id="bR" 
             href="{% url 'genR' %}" class="eleccionGenero">
                 <div>Romance</div>
             </a>
-            <a onclick="style.backgroundColor = '#fff9f6';" 
+            <a  id="bF"
             href="{% url 'genF' %}" class="eleccionGenero">
                 <div>Fantasia </div>
             </a>
-            <a onclick="style.backgroundColor = '#fff9f6';" 
+            <a  id="bH"
             href="{% url 'genH' %}" class="eleccionGenero">
                 <div> Historia</div>
             </a>
@@ -70,4 +69,44 @@
         </article> 
 
     </main>
+
+    <script>
+        const listGeneros = document.getElementsByClassName("eleccionGenero");
+        
+        let btnA = document.getElementById("bA")
+        let btnR =  document.getElementById("bR")
+        let btnF = document.getElementById("bF")
+        let btnH =  document.getElementById("bH")
+
+
+        btnA.addEventListener('mousemove', function(event){
+            btnA.style.backgroundColor="#e1c2b1";
+        });
+        btnA.addEventListener('mouseout', function(event){
+            btnA.style.backgroundColor="#ffe2d2";
+        });
+        
+        btnR.addEventListener('mousemove', function(event){
+            btnR.style.backgroundColor="#cbaf9f";
+        });
+        btnR.addEventListener('mouseout', function(event){
+            btnR.style.backgroundColor="#ffe2d2";
+        });
+        
+        btnF.addEventListener('mousemove', function(event){
+            btnF.style.backgroundColor="#b49b8e";
+        });
+        btnF.addEventListener('mouseout', function(event){
+            btnF.style.backgroundColor="#ffe2d2";
+        });
+        
+        btnH.addEventListener('mousemove', function(event){
+            btnH.style.backgroundColor="#9e887c";
+        });
+        btnH.addEventListener('mouseout', function(event){
+            btnH.style.backgroundColor="#ffe2d2";
+        });
+
+    </script>
+
 {% endblock %}

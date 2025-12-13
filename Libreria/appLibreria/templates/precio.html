@@ -1,12 +1,14 @@
 {% extends "base.html" %}
 
 {% block main %}
-<h2>Filtro de libros menores de {{Prec_lib}} euros:</h2>
+<!-- <h2>Filtro de libros menores de {{Prec_lib}} euros:</h2> -->
    
 <form id="formPrecio" method="get" >
     <label for="inputPrecio">Indica un precio máximo:</label>
     <input id="inputPrecio" type="number" name="precio_max">
     <button id="buttonPrecio" type="submit"> Buscar por precio</button>
+    
+    <button id="buttonRefrescar" type="submit"> Refrescar</button>
 </form>
 
 <article class="div_ListaLibros">
@@ -53,55 +55,63 @@
     </article>
     
     <script>
-        function buscarLibrosPrecioMax(event){ //MUCHO CUIDADO: si en el html hay algun espacio de sobra en la etiqueta que quieres para
-            event.preventDefault();//Por si acaso                           hacer el buscador, al coger el texto para comprobar  
-//                                                                               tambien lo cogera, a mi me ha pasado tener cuidado
-            let precioMax = document.getElementById('inputPrecio');
-            // let precio =  txtBuscado.value;
-            console.log(precioMax.value)
-            
-            let Libros = document.getElementsByClassName("muestraLibros");//Div de la lista de libros
-            let listaLibrosBaratos = [];
+        const precioMax = document.getElementById('inputPrecio');
+        const Libros = document.getElementsByClassName("muestraLibros");
+        const BtnBuscar = document.getElementById('buttonPrecio');
+        const BtnRefrescar = document.getElementById('buttonRefrescar')
+
+        function buscarLibrosPrecioMax(event){ 
+            event.preventDefault();                    
 
             for (let libro of Libros) {
-                let precio = libro.lastElementChild.firstElementChild.lastElementChild.firstElementChild.textContent;
-                            //div       section             ul              a               li
-                console.log("Precio for:"+ precioMax.value)
-                // console.log("Precio libro:"+ precio)
-                if (precio>precioMax.value){ // los caros los ocultamos
-                    console.log("oleee")
-                    // listaLibrosBaratos.push(libro)
+                let precioStr = libro.lastElementChild.firstElementChild.lastElementChild.firstElementChild.textContent;
+                               //div      section             ul                a               li
+                let precioEnNums = precioStr.replace(/[^0-9.]/g, '');
+                
+                if ( parseFloat(precioEnNums)>parseFloat(precioMax.value)){ // los caros los ocultamos
                     libro.style.display = "none";
+                }else{
+                    libro.style.display = "grid";
                 }
             };
-            
-            // for (let libro of Libros){
-            //     let libroSI = libro.querySelector('#tit_libro_Si');
-            //     let libroNO = libro.querySelector('#tit_libro_No');
 
-            //     if (libroSI != null){
-            //         if(texto.toLowerCase() != libroSI.textContent.toLowerCase()){
-            //             libro.style.display = "none";
-            //             //alert("Titulo:" + texto + " / " + libroSI.textContent); //Esto es para ver si algo iba mal o no
-            //         };
-            //     };
-                
-            //     if(libroNO != null){
-            //         if(texto.toLowerCase() != libroNO.textContent.toLocaleLowerCase()){
-            //             libro.style.display = "none";
-            //             //alert("Titulo:" + texto + " / " + libroNO.textContent);
-            //         };
-            //     };//Hay que añadir que al terminar se vuelva a poner todo en display block, sino permanece oculto al volver a buscar
-            // };
-                
+            // for (let libro of Libros){
+            //     if(libro.style.display == "none"){
+            //         let nuevoDIV = document.createElement("div");
+            //         nuevoDIV.innerHTML = "<h3> No hay libros disponibles</h3>";
+            //     }
+            //     else{
+
+            //     }
+            // }
+        };
+
+        function refrescarLibros(event){
+            event.preventDefault();
+
+            let Libros = document.getElementsByClassName("muestraLibros")
+            for (let libro of Libros) {
+                libro.style.display = "grid";
+            }
+            precioMax.value= ""
         };
         
-
-        const BTN = document.getElementById('buttonPrecio');
-
-        BTN.addEventListener('click', function(event){
+        BtnBuscar.addEventListener('click', function(event){
             buscarLibrosPrecioMax(event);
         });
+
+        BtnBuscar.addEventListener('mousemove', function(event){
+            BtnBuscar.style.backgroundColor="#4b2308";
+        });
+        BtnBuscar.addEventListener('mouseout', function(event){
+            BtnBuscar.style.backgroundColor="#884111";
+        });
+
+        BtnRefrescar.addEventListener('click', function(event){
+            refrescarLibros(event);
+        });
+
+
     </script>
      
 {% endblock %}

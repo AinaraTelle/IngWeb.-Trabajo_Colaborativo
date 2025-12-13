@@ -234,18 +234,28 @@ main{
     border-radius: 5px;
 }
 #formPrecio{
+    border-top: 1px solid #c0a390;
     border-bottom: 1px solid #c0a390;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap:25px;
-    padding-bottom: 10px;
+    gap:20px;
+    padding: 10px 10px;
     margin: 30px 30px;
     
 }
 #buttonPrecio{
     background-color: #884111;
     color:white;
+    border: 1px solid #884111;
+    padding: 12px 12px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 3px;
+}
+#buttonRefrescar{
+    background-color: #fbede3;
+    color:#2e1708;
     border: 1px solid #884111;
     padding: 12px 12px;
     padding-left: 15px;
