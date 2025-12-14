@@ -1,8 +1,17 @@
 {% extends "base.html"%}
 {% block titleXD %}Carrito{%endblock%}
 {%block main%}
-<h2>Carrito de {{usuario.username}}</h2>
 <main>
+    <div >
+        <h3>Cambiar contraseña</h3>
+    
+        <form method="post" action="{% url 'actualizar_contraseña' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Actualizar contraseña</button>
+        </form>
+    </div>
+    <h2>Carrito de {{usuario.username}}</h2>
     <div class="carrito-contenedor">
 
         <div class="carrito-lista">
@@ -28,7 +37,7 @@
             {% endif %}
         </div>
         <h3>Precio Total: {{carrito.total}} €</h3>
-        <form action="%url 'comprar'%">
+        <form action="{%url 'comprar'%}" method="post">
             {%csrf_token%}
             <button type="submit">comprar</button>
         </form>

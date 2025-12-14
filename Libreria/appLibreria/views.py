@@ -1,11 +1,14 @@
 from decimal import Decimal
-from pyexpat.errors import messages
 from django.shortcuts import redirect, render
 from django.http import HttpResponse, Http404 
 from appLibreria import models #importamos la tabla de models para poder trabajar con los datos de la BD
 from django.contrib.auth.decorators import login_required
 from .forms import registroFrom
 from django.contrib.auth import login
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
+from django.views.decorators.http import require_POST
+from django.contrib import messages
 # Create your views here.
 
 def index(request):
@@ -114,7 +117,7 @@ def ver_carrito(request):
     }
     return render(request, "carrito.html", context)
 
-
+@require_POST
 def comprar(request):#Basicamente existe para actualizar la existencias de libros
     carrito=models.Carrito.objects.get(usuario=request.user)
     for item in carrito.items.all():
@@ -129,8 +132,7 @@ def comprar(request):#Basicamente existe para actualizar la existencias de libro
 
     
     carrito.items.all().delete()#Vacia el carrito despues de la compra
-    messages.success(request, "Compra realizada correctamente")
-    return redirect('')  # Una vez terminada la compra se redirige a inicio
+    return redirect('ver_carrito')  # Una vez terminada la compra se redirige a inicio
 
 def registrar_usuario(request):
     if request.method=='POST':
@@ -142,3 +144,13 @@ def registrar_usuario(request):
     else:
         form=registroFrom()
     return render(request, 'registro.html', {'form': form})
+
+def actualizar_contraseña(request):
+    if request.method == 'POST': #Poenmos esto ya que se puede llegar a cambiar la contraseña sin querer con un get
+        form=PasswordChangeForm(user=request.user, data=request.POST)
+        if form.is_valid():
+            user = form.save()#Guardamos el user con la contraseña actualizada
+            update_session_auth_hash(request, user)#Importante:Se utiliza para que no nos eche de la sesión
+            return redirect('ver_carrito')
+
+    return render(request, 'carrito.html', {'form': form})
