@@ -3,12 +3,17 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse, Http404 
 from appLibreria import models #importamos la tabla de models para poder trabajar con los datos de la BD
 from django.contrib.auth.decorators import login_required
-from .forms import registroFrom
+from .forms import registroFrom, logInForm
+from .models import Usuario
 from django.contrib.auth import login
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.views.decorators.http import require_POST
 from django.contrib import messages
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import check_password
+
+
 # Create your views here.
 
 def index(request):
@@ -136,14 +141,40 @@ def comprar(request):#Basicamente existe para actualizar la existencias de libro
 
 def registrar_usuario(request):
     if request.method=='POST':
-        form=registroFrom
+        form=registroFrom(request.POST)
         if form.is_valid:
-            usuario=form.save() #se guarda como usuario para acceso mas facil luego (como editar datos)
-            login(request,usuario)
-            return redirect('generoTodosLibros')
+            if form.cleaned_data['password']==form.cleaned_data['password2']:
+                usuario=Usuario(
+                    nombre_usuario=form.cleaned_data['nombre_usuario'],
+                    email_usuario=form.cleaned_data['email_usuario'],
+                    password_hash=make_password(form.cleaned_data['password'])
+                )
+                usuario.save()
+                request.session['usuario_id']=usuario.id#para hacer login manualmente
+                return redirect('generoTodosLibros')
+            else:
+                return HttpResponse("Contraseñas no coinciden")
     else:
         form=registroFrom()
     return render(request, 'registro.html', {'form': form})
+
+def logInUsuario(request):
+    if request.method=='POST':
+        form=logInForm(request.POST)
+        if form.is_valid():
+            try:
+                usuario=Usuario.objects.get(nombre_usuario=form.cleaned_data['nombre_usuario'], email_usuario=form.cleaned_data['email_usuario'])
+            except Usuario.DoesNotExist:
+                return HttpResponse("Usuario no existente, nombre o direccion incorrectos")
+            
+            if check_password(form.cleaned_data['password'], usuario.password):
+                request.session['usuario_id']=usuario.id
+                return redirect('generoTodosLibros')
+    else:
+        form=logInForm()
+    return render(request, 'login.html', {'form':form})
+
+    
 
 def actualizar_contraseña(request):
     if request.method == 'POST': #Poenmos esto ya que se puede llegar a cambiar la contraseña sin querer con un get

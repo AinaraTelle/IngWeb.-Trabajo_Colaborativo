@@ -14,13 +14,13 @@
         </aside>
         <section>
             <h1 id="TituloPagina">
-               {% block titleXD %} <b>Registrarse</b>{% endblock %} 
+               {% block titleXD %} <b>Log In </b>{% endblock %} 
             </h1>
             
             <form method="post">
                 {%csrf_token%}
                 {{form.as_p}}
-                <button type="submit">Crear perfil e iniciar sesion</button>
+                <button type="submit">Iniciar sesion</button>
             </form>
 
 

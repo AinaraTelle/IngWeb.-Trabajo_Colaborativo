@@ -28,4 +28,5 @@ urlpatterns = [
     path('carrito/actualizar_contraseña/', views.actualizar_contraseña, name='actualizar_contraseña'),
 
     path('registro/',views.registrar_usuario, name='registrarUsuario'),
+    path('login/',views.logInUsuario, name='LogIn')
 ]

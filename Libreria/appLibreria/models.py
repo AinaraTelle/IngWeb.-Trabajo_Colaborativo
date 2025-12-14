@@ -57,5 +57,8 @@ class CarritoItem(models.Model):
 
 
                                     
-
+class Usuario(models.Model):
+    nombre_usuario=models.CharField(unique=True)
+    email_usuario=models.EmailField(unique=True)
+    password=models.CharField
 
