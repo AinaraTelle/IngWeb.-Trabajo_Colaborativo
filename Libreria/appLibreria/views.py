@@ -44,13 +44,21 @@ def generoTodosLibros(request):
     return render(request, 'genero.html', context) #Render se usa para crear un HTML como resuesta, por decirlo simple, y le pasamos lo que necesita para funcionar
       
 
-def portadaYAntiguedad(request): #devuelve la portada tambien pero no he encontrado el atributo en modelos por lo que aun no añado
+def paginaHome(request): #devuelve la portada tambien pero no he encontrado el atributo en modelos por lo que aun no añado
     Libros = models.Libro.objects.filter(stock__gte=1)
     context = {
         'Libros': Libros
     }
 
     return render(request, 'home.html', context)
+
+def paginaInicio(request): #devuelve la portada tambien pero no he encontrado el atributo en modelos por lo que aun no añado
+    # Libros = models.Libro.objects.filter(stock__gte=1)
+    context = {
+        # 'Libros': Libros
+    }
+
+    return render(request, 'inicio.html', context)
 
 
 def detalles_libro(request, isbn_sel):

@@ -1,0 +1,26 @@
+<html lang="es">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papirirum.com</title>
+</head>
+<body id="inicioOrden">
+    <nav class="area-izquierda" style="background-color: #ffd0b0;">
+        <!-- <img src="../static/imgs/Papirium_LogoCuad.png" alt="Sin imagen"> -->
+    </nav>
+    <section id="inicioDatos" style="background-color:#cc7234">
+        <h1 id="inTit"> <strong>¡Bienvenido!</strong></h1>
+        <span style="display: flex; gap: 4vw">
+            <a class="inBoton" href="{% url 'registrarUsuario' %}">
+                <div>Registrarse</div>
+            </a>
+            <a class="inBoton" href="{% url 'LogIn' %}">
+                <div>Iniciar Sesión</div>
+            </a>
+        </span>
+    </section>
+
+</body>
+</html>
