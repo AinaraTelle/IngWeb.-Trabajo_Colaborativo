@@ -12,7 +12,7 @@
     </nav>
     <section id="inicioDatos" style="background-color:#cc7234">
         <h1 id="inTit"> <strong>¡Bienvenido!</strong></h1>
-        <span style="display: flex; gap: 4vw">
+        <span id="inAgrupBotones" >
             <a class="inBoton" href="{% url 'registrarUsuario' %}">
                 <div>Registrarse</div>
             </a>
@@ -27,41 +27,32 @@
         const botI=botones[1]
 
         botR.addEventListener('mousemove', function(event){
+            // botR.style.padding="65px"
+            // botR.style.color="#ad4804"
+            // botR.style.transition="0.3s"
+
             botR.style.padding="75px"
             botR.style.color="#ad4804"
             botR.style.padding="55px 55px"
             botR.style.transition="0.3s"
-            botI.style.padding="70px"
-            botI.style.padding="50px 50px"
-            botI.style.transition="0.3s"
         });
         botR.addEventListener('mouseout', function(event){
-            botR.style.padding="70px"
+            botR.style.height="70px"
             botR.style.color="#2e1708"
             botR.style.padding="50px 50px"
             botR.style.transition="0.3s"
-            botI.style.padding="70px"
-            botI.style.padding="50px 50px"
-            botI.style.transition="0.3s"
         });
         botI.addEventListener('mousemove', function(event){
             botI.style.padding="75px"
             botI.style.color="#ad4804"
             botI.style.padding="55px 55px"
             botI.style.transition="0.3s"
-            botR.style.padding="70px"
-            botR.style.padding="50px 50px"
-            botR.style.transition="0.3s"
         });
         botI.addEventListener('mouseout', function(event){
-            botI.style.padding="70px"
+            botI.style.height="70px"
             botI.style.color="#2e1708"
-            
             botI.style.padding="50px 50px"
             botI.style.transition="0.3s"
-            botR.style.padding="70px"
-            botR.style.padding="50px 50px"
-            botR.style.transition="0.3s"
         });
     </script>
 </body>
