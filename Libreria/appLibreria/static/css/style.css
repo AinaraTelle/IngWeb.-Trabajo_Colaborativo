@@ -103,6 +103,10 @@ body {
     background-color: #ffe2d2;
     border-bottom: 1px solid #c0a390;
     width: 100%;
+    display:block;
+    text-decoration: none;
+    color: #d87746;
+         
 }
 
 .botAutor:hover{
@@ -111,6 +115,7 @@ body {
 
 .agrupadorAutores{
     border-right: 2px solid #965538;
+    display: block;       
 }
 .autorespagina{
     display: grid;

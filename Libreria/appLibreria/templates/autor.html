@@ -7,10 +7,10 @@
     
     <aside class="agrupadorAutores">
         {%for autor in autores%}
-        <form method="get">
-            <input type="hidden" name="autor_seleccionado" value="{{ autor.id }}">
-            <button class="botAutor" type="submit">{{ autor.nombre }}</button>
-        </form>
+        <a href="{% url 'busqueda_autores' %}?autor_seleccionado={{ autor.id }}" 
+           class="botAutor">
+            {{ autor.nombre }}
+        </a>
         {% endfor %}
     </aside>
 
@@ -60,3 +60,15 @@
 
 </main>
 {%endblock%}
+<script>
+    for (let i = 0; i < botonesAutores.length; i++) {   
+        botonesAutores[i].addEventListener("mousemove", function() {
+            this.style.backgroundColor = "#e1c2b1";
+        });
+        botonesAutores[i].addEventListener("mouseout", function() {
+            this.style.backgroundColor = "#ffe2d2";
+        });    
+    }
+    
+
+</script>
