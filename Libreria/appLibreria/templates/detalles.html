@@ -14,7 +14,8 @@
                     <li><strong>Precio: </strong> {{libro.precio}} €</li>
                     <li><strong>Num paginas: </strong> {{libro.num_paginas}}</li>
                     <li><strong>Autor: </strong> {{libro.autor}}</li>
-                    <li><strong>En stock: </strong> {{libro.stock}}</li>
+                    <li><strong>En stock: </strong> <span id="stock_Si">{{libro.stock}} </span></li>
+                    <li><strong>Has comprado: </strong> <span id="cant_compra_Si">{{cant_compra}} </span> unidades</li>
                     <h3>Descripción:</h3>
                     <p>{{libro.descripcion}}</p>
                 </ul>
@@ -23,7 +24,7 @@
                         <div>Volver a Home</div>
                     </a></div>
                     <!--Tengo que cambiar el estilo de los botones, la verdad es que es un poco feo y el codigo es un poco meh-->
-                    <div><a class="botonesDetalles" id="Boton_mandar_carrito" href="{% url 'aniadirLibro' libro.isbn %}"> 
+                    <div><a class="botonesDetalles" id="Boton_mandar_carrito_Si" href="{% url 'aniadirLibro' libro.isbn %}"> 
                         <div>Añadir al carrito</div>
                     </a></div>
                 </div>
@@ -44,6 +45,7 @@
                     <li><strong>Num paginas: </strong> {{libro.num_paginas}}</li>
                     <li><strong>Autor: </strong> {{libro.autor}}</li>
                     <li><strong>Stock: </strong> {{libro.stock}}</li>
+                    <li><strong>Has comprado: </strong> {{cant_compra}} unidades</li>
                     <h3>Descripción:</h3>
                     <p>{{libro.descripcion}}</p>
                 </ul>
@@ -52,7 +54,7 @@
                         <div>Volver a Home</div>
                     </a>
                     <!--No es un formulario, es un view-->
-                    <a class="botonHeader" id="Boton_mandar_carrito" > <!-- href="{% url 'ver_carrito' %}" -->
+                    <a class="botonHeader" id="Boton_mandar_carrito_No" > <!-- href="{% url 'ver_carrito' %}" -->
                         <div>Añadir al carrito</div>
                     </a>
                 </div>
@@ -62,16 +64,29 @@
         </div>
     {% endif %}
         <script>
-            function meter_Carrito(){
-                console.log("Funcionaaaaa");
+            function superado_stock(event){//Si se supera el stock no te deja comprar
 
                 let libroSI = document.getElementById('tit_libro_Si').textContent;
-                console.log(libroSI);
+                let stockSI = document.getElementById('stock_Si').textContent;
+                let cantSi = document.getElementById('cant_compra_Si').textContent;
+                
+                alert("Stock: " + stockSI);
+                alert("Comprado: " + cantSi);
+
+                if(stockSI <= cantSi){
+                    event.preventDefault();
+                    
+                    alert("Lo sentimos, pero no quedan mas unidades de: " + libroSI + " para comprar");
+                    BTN_carrito_Si.style.backgroundColor = "red";
+                };
+                
                 //let libroNO = document.getElementById('tit_libro_No');
             };
 
-            let BTN_carrito = document.getElementById('Boton_mandar_carrito');
+            const BTN_carrito_Si = document.getElementById('Boton_mandar_carrito_Si');
 
-            BTN_carrito.addEventListener('click', meter_Carrito);
+            BTN_carrito_Si.addEventListener('click', function(event){
+                superado_stock(event)
+            } );
         </script>
 {% endblock %}

@@ -74,13 +74,15 @@ def aniadir_Libro(request, isbn_lib):#Y si hago que pase el ISBN y asi ya sabe q
     nv_libro = models.Libro.objects.get(isbn=isbn_lib)
     nv_carrito = models.Carrito.objects.get(usuario=request.user)
 
-    existente, nuevo_libro = models.CarritoItem.objects.get_or_create( carrito = nv_carrito, libro = nv_libro, cantidad = 1)#Ya guarda automaticamente si lo tiene que crear
+    existente, nuevo_libro = models.CarritoItem.objects.get_or_create( carrito = nv_carrito, libro = nv_libro)#Ya guarda automaticamente si lo tiene que crear
 
-    if(existente):#No va y ns porque, le doy una vuelta ahora
+    if( not nuevo_libro):#Hay que hacer que cuando no haya mas stock no deje comprar
         #sumamos uno a la cantidad y lo devolvemos
         existente.cantidad += 1
+        existente.save()
+        
     
-    return render(request, 'detalles.html', {'libro': nv_libro, 'ISBN': isbn_lib})#La idea es que refresque la PG pero añada el libro al carrito
+    return render(request, 'detalles.html', {'libro': nv_libro, 'ISBN': isbn_lib, 'cant_compra': existente.cantidad})#La idea es que refresque la PG pero añada el libro al carrito
 
 
 
