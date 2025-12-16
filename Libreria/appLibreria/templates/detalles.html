@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block titleXD %} Detalles {% endblock %}
 {% block main %}
-    {% if libro.imagen %}<!--Aqui puedo usar la forma esa de utilizar "for" para mostrar todos los atributos de algo que le pases-->
+    {% if libro.imagen %}<!--Si hay que cambiar el HTML, mejor trastocar solo la parte de la imagen, y unificar el resto del código-->
         <div id="detalles_mainDIV">
             <div class="muestra_libros_detalles">
                 <img src="{{libro.imagen.url}}" alt="No hay foto del libro en este momento" 
@@ -10,21 +10,21 @@
             
             <div>
                 <ul>
-                    <li><strong>Titulo: </strong> <span id="tit_libro_Si">{{libro.titulo}}</span></li>
+                    <li><strong>Titulo: </strong> <span id="tit_libro">{{libro.titulo}}</span></li>
                     <li><strong>Precio: </strong> {{libro.precio}} €</li>
                     <li><strong>Num paginas: </strong> {{libro.num_paginas}}</li>
                     <li><strong>Autor: </strong> {{libro.autor}}</li>
-                    <li><strong>En stock: </strong> <span id="stock_Si">{{libro.stock}} </span></li>
-                    <li><strong>Has comprado: </strong> <span id="cant_compra_Si">{{cant_compra}} </span> unidades</li>
+                    <li><strong>En stock: </strong> <span id="stock">{{libro.stock}} </span></li>
+                    <li><strong>Has comprado: </strong> <span id="cant_compra">{{cant_compra}} </span> unidades</li>
                     <h3>Descripción:</h3>
                     <p>{{libro.descripcion}}</p>
                 </ul>
-                <div style="display: flex; justify-content: center; gap: 100px;"> <!--Recuerda que aqui has puesti el fondo verde, pero en la calls tambien hay otro fondo puesto, cuidado-->
+                <div style="display: flex; justify-content: center; gap: 100px;"> 
                     <div><a class="botonesDetalles" href="{% url 'antiguedad' %}">
                         <div>Volver a Home</div>
                     </a></div>
-                    <!--Tengo que cambiar el estilo de los botones, la verdad es que es un poco feo y el codigo es un poco meh-->
-                    <div><a class="botonesDetalles" id="Boton_mandar_carrito_Si" href="{% url 'aniadirLibro' libro.isbn %}"> 
+                    
+                    <div><a class="botonesDetalles" id="Boton_mandar_carrito" href="{% url 'aniadirLibro' libro.isbn %}"> 
                         <div>Añadir al carrito</div>
                     </a></div>
                 </div>
@@ -40,23 +40,23 @@
             
             <div>
                 <ul>
-                    <li><strong>Titulo: </strong> {{libro.titulo}}</li>
+                    <li><strong>Titulo: </strong> <span id="tit_libro">{{libro.titulo}}</span> </li>
                     <li><strong>Precio: </strong> {{libro.precio}} €</li>
                     <li><strong>Num paginas: </strong> {{libro.num_paginas}}</li>
                     <li><strong>Autor: </strong> {{libro.autor}}</li>
-                    <li><strong>Stock: </strong> {{libro.stock}}</li>
-                    <li><strong>Has comprado: </strong> {{cant_compra}} unidades</li>
+                    <li><strong>Stock: </strong> <span id="stock">{{libro.stock}} </span> </li>
+                    <li><strong>Has comprado: </strong> <span id="cant_compra">{{cant_compra}} </span> unidades</li>
                     <h3>Descripción:</h3>
                     <p>{{libro.descripcion}}</p>
                 </ul>
-                <div style="display: flex; padding: 2px;"> <!--Recuerda que aqui has puesti el fondo verde, pero en la calls tambien hay otro fondo puesto, cuidado-->
-                    <a class="botonHeader" href="{% url 'antiguedad' %}" >
+                <div style="display: flex; justify-content: center; gap: 100px;">
+                    <div><a class="botonesDetalles" href="{% url 'antiguedad' %}" >
                         <div>Volver a Home</div>
-                    </a>
-                    <!--No es un formulario, es un view-->
-                    <a class="botonHeader" id="Boton_mandar_carrito_No" > <!-- href="{% url 'ver_carrito' %}" -->
+                    </a></div>
+                    
+                    <div><a class="botonesDetalles" id="Boton_mandar_carrito" href="{% url 'aniadirLibro' libro.isbn %}">
                         <div>Añadir al carrito</div>
-                    </a>
+                    </a></div>
                 </div>
                 
             </div>
@@ -64,29 +64,28 @@
         </div>
     {% endif %}
         <script>
+
             function superado_stock(event){//Si se supera el stock no te deja comprar
 
-                let libroSI = document.getElementById('tit_libro_Si').textContent;
-                let stockSI = document.getElementById('stock_Si').textContent;
-                let cantSi = document.getElementById('cant_compra_Si').textContent;
-                
-                alert("Stock: " + stockSI);
-                alert("Comprado: " + cantSi);
+                let libro = document.querySelector('#tit_libro').textContent;
+                let stock = parseInt(document.querySelector('#stock').textContent);
+                let cant = parseInt(document.querySelector('#cant_compra').textContent);
 
-                if(stockSI <= cantSi){
+                if(stock <= cant){//Y si se desactiva el boton?
                     event.preventDefault();
                     
-                    alert("Lo sentimos, pero no quedan mas unidades de: " + libroSI + " para comprar");
-                    BTN_carrito_Si.style.backgroundColor = "red";
+                    alert("Lo sentimos, pero no quedan mas unidades de: " + libro + " para comprar");
+                    BTN_carrito.style.backgroundColor = "red";
+                    BTN_carrito.style.opacity = "0.5";
+                    BTN_carrito.style.cursor = "not-allowed";
                 };
-                
-                //let libroNO = document.getElementById('tit_libro_No');
             };
 
-            const BTN_carrito_Si = document.getElementById('Boton_mandar_carrito_Si');
+            const BTN_carrito = document.querySelector('#Boton_mandar_carrito');
 
-            BTN_carrito_Si.addEventListener('click', function(event){
-                superado_stock(event)
+            BTN_carrito.addEventListener('click', function(event){
+                superado_stock(event);
             } );
+
         </script>
 {% endblock %}
