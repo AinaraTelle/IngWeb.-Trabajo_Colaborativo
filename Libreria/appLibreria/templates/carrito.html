@@ -37,10 +37,19 @@
             {% endif %}
         </div>
         <h3>Precio Total: {{carrito.total}} €</h3>
-        <form action="{%url 'comprar'%}" method="post">
+        <form id="botonComprar" action="{%url 'comprar'%}" method="post">
             {%csrf_token%}
             <button type="submit">comprar</button>
         </form>
+        <script>
+            const formCompra= document.getElementById("botonComprar");
+            formCompra.addEventListener("submit",function(){
+                alert("Gracias por comprar en Papirium ;)")
+
+            })
+
+        </script>
 </main>
 
 {%endblock%}
+

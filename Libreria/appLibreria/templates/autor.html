@@ -59,16 +59,22 @@
 
 
 </main>
-{%endblock%}
 <script>
+    const botonesAutores = document.getElementsByClassName("botAutor");
     for (let i = 0; i < botonesAutores.length; i++) {   
         botonesAutores[i].addEventListener("mousemove", function() {
             this.style.backgroundColor = "#e1c2b1";
         });
         botonesAutores[i].addEventListener("mouseout", function() {
             this.style.backgroundColor = "#ffe2d2";
+        });
+        botonesAutores[i].addEventListener("click",function(){
+            const nombreAutor=this.textContent.trim();/* Toma el nombre del autor con textContent visto en clase*/
+            alert("Has seleccionado a " + nombreAutor )
+
         });    
     }
     
 
 </script>
+{%endblock%}
