@@ -2,8 +2,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.paginaHome, name='antiguedad'), 
-    path('a', views.paginaInicio, name='inicio'), 
+    path('home', views.paginaHome, name='antiguedad'), 
+    path('', views.paginaInicio, name='inicio'), 
     path('index/', views.index, name='index'),
 
     path('genero/<str:genero_libro>/', views.genero, name='genero'),#H = historico, R = romance, A = acción, F = fantasia enel buscador poner las letras solas, no las palabras, asi esta en la BD
@@ -23,6 +23,7 @@ urlpatterns = [
 
     path('backapp/', views.masCortos,name='masCortos' ),
     path('detalles/<str:isbn_sel>', views.detalles_libro, name='detalleLibro'),
+    path('detalles/ref/<str:isbn_lib>', views.aniadir_Libro, name='aniadirLibro'),
 
     path('carrito/', views.ver_carrito, name='ver_carrito'),
     path('carrito/comprar/', views.comprar, name='comprar'),

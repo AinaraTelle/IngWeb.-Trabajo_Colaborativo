@@ -61,10 +61,28 @@ def paginaInicio(request): #devuelve la portada tambien pero no he encontrado el
     return render(request, 'inicio.html', context)
 
 
+
+#Detalles.HTML:
+
 def detalles_libro(request, isbn_sel):
     Libro = models.Libro.objects.get(isbn=isbn_sel)#Obtenemos el libro cuyo isbn es el mismo que el que qeremos ver detallado
 
-    return render(request, 'detalles.html', {'libro': Libro})#Esta forma de pasarle "Libro" es la misma de siempre pero sin meterlo todo en una variable
+    return render(request, 'detalles.html', {'libro': Libro, 'ISBN': isbn_sel})#Esta forma de pasarle "Libro" es la misma de siempre pero sin meterlo todo en una variable
+
+
+def aniadir_Libro(request, isbn_lib):#Y si hago que pase el ISBN y asi ya sabe que libro se añade
+    nv_libro = models.Libro.objects.get(isbn=isbn_lib)
+    nv_carrito = models.Carrito.objects.get(usuario=request.user)
+
+    existente, nuevo_libro = models.CarritoItem.objects.get_or_create( carrito = nv_carrito, libro = nv_libro, cantidad = 1)#Ya guarda automaticamente si lo tiene que crear
+
+    if(existente):#No va y ns porque, le doy una vuelta ahora
+        #sumamos uno a la cantidad y lo devolvemos
+        existente.cantidad += 1
+    
+    return render(request, 'detalles.html', {'libro': nv_libro, 'ISBN': isbn_lib})#La idea es que refresque la PG pero añada el libro al carrito
+
+
 
 def precioTodosLibros(request):
     try:
@@ -120,7 +138,7 @@ def busqueda_autor(request):
 
 @login_required
 def ver_carrito(request):
-    carrito ,creado = models.Carrito.objects.get_or_create(usuario=request.user)# Esta con coma ya que aqui se crea el carrito una vez que el usuario accede por primera vez o detecta si esta creadp, por lo tanto el carrito sería el tipo de item y el creado es true o false
+    carrito ,creado = models.Carrito.objects.get_or_create(usuario=request.user)# Esta con coma ya que aqui se crea el carrito una vez que el usuario accede por primera vez o detecta si esta creado, por lo tanto el carrito sería el tipo de item y el creado es true o false
     items=carrito.items.all()#Obtenemos los libros con su precio y la cantidad de los mismos
     context = {
         'usuario': request.user,

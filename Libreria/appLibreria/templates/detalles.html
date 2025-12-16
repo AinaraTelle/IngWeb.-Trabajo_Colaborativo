@@ -10,7 +10,7 @@
             
             <div>
                 <ul>
-                    <li><strong>Titulo: </strong> {{libro.titulo}}</li>
+                    <li><strong>Titulo: </strong> <span id="tit_libro_Si">{{libro.titulo}}</span></li>
                     <li><strong>Precio: </strong> {{libro.precio}} €</li>
                     <li><strong>Num paginas: </strong> {{libro.num_paginas}}</li>
                     <li><strong>Autor: </strong> {{libro.autor}}</li>
@@ -23,7 +23,7 @@
                         <div>Volver a Home</div>
                     </a></div>
                     <!--Tengo que cambiar el estilo de los botones, la verdad es que es un poco feo y el codigo es un poco meh-->
-                    <div><a class="botonesDetalles" href="{% url 'antiguedad' %}"> 
+                    <div><a class="botonesDetalles" id="Boton_mandar_carrito" href="{% url 'aniadirLibro' libro.isbn %}"> 
                         <div>Añadir al carrito</div>
                     </a></div>
                 </div>
@@ -48,11 +48,11 @@
                     <p>{{libro.descripcion}}</p>
                 </ul>
                 <div style="display: flex; padding: 2px;"> <!--Recuerda que aqui has puesti el fondo verde, pero en la calls tambien hay otro fondo puesto, cuidado-->
-                    <a class="botonHeader" href="{% url 'antiguedad' %}" style=" background-color: green; color: black;">
+                    <a class="botonHeader" href="{% url 'antiguedad' %}" >
                         <div>Volver a Home</div>
                     </a>
-                    <!--Tengo que cambiar el estilo de los botones, la verdad es que es un poco feo y el codigo es un poco meh-->
-                    <a class="botonHeader" href="{% url 'antiguedad' %}" style=" background-color: green; color: black;"> 
+                    <!--No es un formulario, es un view-->
+                    <a class="botonHeader" id="Boton_mandar_carrito" > <!-- href="{% url 'ver_carrito' %}" -->
                         <div>Añadir al carrito</div>
                     </a>
                 </div>
@@ -61,4 +61,17 @@
             
         </div>
     {% endif %}
+        <script>
+            function meter_Carrito(){
+                console.log("Funcionaaaaa");
+
+                let libroSI = document.getElementById('tit_libro_Si').textContent;
+                console.log(libroSI);
+                //let libroNO = document.getElementById('tit_libro_No');
+            };
+
+            let BTN_carrito = document.getElementById('Boton_mandar_carrito');
+
+            BTN_carrito.addEventListener('click', meter_Carrito);
+        </script>
 {% endblock %}
