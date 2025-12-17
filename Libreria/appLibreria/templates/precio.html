@@ -11,7 +11,7 @@
     <button id="buttonRefrescar" type="submit"> Refrescar</button>
 </form>
 
-<article id="mainPrecio" class="div_ListaLibros">
+<div id="mainPrecio" class="div_ListaLibros">
     {% for libro in Libros %}
         <div class="muestraLibros">
             <a href="{% url 'detalleLibro' libro.isbn %}">
@@ -23,21 +23,21 @@
                 </div>
             {% endif %}
             </a>
-            <section class="libros_letras">
+            <div class="libros_letras">
                 <ul class="datosLibro">
-                    <a id="Dtitulo" href="{% url 'detalleLibro' libro.isbn %}">
-                        <li class="datosLibro" >
+                    <li><a class="Dtitulo" href="{% url 'detalleLibro' libro.isbn %}">
+                        <span class="datosLibro">
                             <strong>{{libro.titulo}}</strong> 
-                        </li>
-                    </a>
+                        </span>
+                    </a></li>
                     <li class="datosLibro"> {{libro.autor}} </li>
                     <li class="datosLibro" id="Dprecio"> <strong>{{libro.precio}} €</strong></li>
                 </ul>  
-            </section>
+            </div>
         </div>
     {% endfor %}
 
-    </article>
+</div>
     
     <script>
         const precioMax = document.getElementById('inputPrecio');
@@ -59,29 +59,7 @@
                     libro.style.display = "grid";
                 }
             };
-        // CODIGO PARA QUE SALGA "NO HAY LIBROS" cuando no haya ni uno
-        //     let sinLibros = false
-        //     let nuevoDIV = document.createElement("div");
-        //     nuevoDIV.innerHTML = "<h3> No hay libros disponibles</h3>";
-            
-        //     let mainPrecio =  document.getElementById("mainPrecio");
-        //     let padreDeMainPrecio = mainPrecio.parentNode;
-        //     padreDeMainPrecio.insertBefore(nuevoDIV, mainPrecio);
-        //     nuevoDIV.style.display = "grid"
-
-        //     for (let libro of Libros){
-        //         if(libro.style.display != "none"){
-        //             sinLibros =true
-        //         }
-        //         else{
-        //             sinLibros =false
-        //         }
-        //     }
-        //     if(sinLibros){
-        //         nuevoDIV.style.display = "grid"
-        //     }else{
-        //         nuevoDIV.style.display = "none"
-        //     }
+        
         };
 
         function refrescarLibros(event){

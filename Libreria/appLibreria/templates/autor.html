@@ -14,24 +14,24 @@
         {% endfor %}
     </aside>
 
-    <article class="div_ListaLibros">
+    <div class="div_ListaLibros">
         {% for libro in libros %}
             {% if libro.imagen %}
             <div class="muestraLibros">
                 <a href="{% url 'detalleLibro' libro.isbn %}">
                     <img class="fondo_libros" src="{{libro.imagen.url}}" alt="Sin imagen">
                 </a>
-                <section class="libros_letras">
+                <div class="libros_letras">
                     <ul class="datosLibro">
-                        <a id="Dtitulo" href="{% url 'detalleLibro' libro.isbn %}">
-                            <li class="datosLibro" >
+                        <li><a class="Dtitulo" href="{% url 'detalleLibro' libro.isbn %}">
+                            <span class="datosLibro" >
                                 <strong>{{libro.titulo}}</strong> 
-                            </li>
-                        </a>
+                            </span>
+                        </a></li>
                         <li class="datosLibro"> {{libro.autor}} </li>
-                        <li class="datosLibro" id="Dprecio"> <strong>{{libro.precio}} €</strong></li>
+                        <li class="datosLibro Dprecio"> <strong>{{libro.precio}} €</strong></li>
                     </ul>  
-                </section>
+                </div>
             </div>
 
             {% else %}
@@ -41,21 +41,21 @@
                         <p>Sin imagen</p>             
                     </div>
                 </a>
-                <section class="libros_letras">
+                <div class="libros_letras">
                     <ul class="datosLibro">
-                        <a id="Dtitulo" href="{% url 'detalleLibro' libro.isbn %}">
-                            <li class="datosLibro" >
+                        <li><a class="Dtitulo" href="{% url 'detalleLibro' libro.isbn %}">
+                            <span class="datosLibro" >
                                 <strong>{{libro.titulo}}</strong> 
-                            </li>
-                        </a>
+                            </span>
+                        </a></li>
                         <li class="datosLibro"> {{libro.autor}} </li>
-                        <li class="datosLibro" id="Dprecio"> <strong>{{libro.precio}} €</strong></li>
+                        <li class="datosLibro Dprecio"> <strong>{{libro.precio}} €</strong></li>
                     </ul>  
-                </section>
+                </div>
             </div>
             {% endif %}
         {% endfor %} 
-        </article> 
+    </div> 
 
 
 </main>
