@@ -1,0 +1,16 @@
+__ DJANGO __
+
+Escogidas y completadas:
+- Opción 5: Realizar 2 de las funcionalidades Create-Update-Delete (en lugar de sólo una):
+ Las opciones de creación pueden ser vistas en el registro de usuarios, donde se generan y añaden usuarios nuevos,  mientras que las de update pueden ser vistas en actualizar contraseña y compra, donde se actualizan valores en usuarios, carrito y libros.
+- Opción 3: Incluir uno de los siguientes mecanismos: Autenticación
+Se hace uso de las opciones de autenticación repetidamente via User y diferentes métodos en el programa, específicamente en vistas.
+- Opción 2: Carga de datos iniciales para la aplicación (todas las entidades).
+Exceptuando user y carrito que dependen del uso dado a la página, el resto de bases han sido previamente añadidas y se muestran al inicializar la página.
+
+
+__ JAVASCRIPT __
+
+Escogida y completada:
+- Opción 1: Interacción enriquecida en el cliente con JavaScript (eventos, efectos) y sus librerías o frameworks. Todas las páginas .html deben contener algún evento o efecto, siendo mandatorio el comprobar los campos del formulario antes de mandarlo.
+Todas las páginas html incluyen JavaScript de alguna manera u otra.
