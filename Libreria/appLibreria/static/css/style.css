@@ -419,3 +419,13 @@ main{
 }
 
 /* --------------------------- formularios -----------------------*/
+form{
+    width: 400px;
+}
+#formA{
+    width: 400px;
+    display: inline-block;
+}
+#formS{
+    text-align: center;
+}

@@ -16,17 +16,45 @@
             <h1 id="TituloPagina">
                {% block titleXD %} <b>Log In </b>{% endblock %} 
             </h1>
-            <article>
-                <form method="post">
+            
+
+        </section>
+        <section id="formS"> 
+            <article id="formA">
+                <form method="post" id="login">
                 {%csrf_token%}
                 {{form.as_p}}
-                <button type="submit">Iniciar sesion</button>
+                <button type="submit" id="Iniciar">Iniciar sesion</button>
                 </form>
             </article>
             
+            <script>
+                document.addEventListener("DOMContentLoaded",function(){
+                    const campos=document.querySelectorAll(
+                        "#login input[name='nombre'], " +
+                        "#login input[name='email'], " +
+                        "#login input[name='contrasenia']");
 
+                    campos.forEach(campo=>{
+                        campo.addEventListener("focusout",function(){
+                            if(this.value.trim()==''){
+                                this.style.backgroundColor = "#f8d7da";
+                            } else{
+                                this.style.backgroundColor = "";
+                            }
+                        });
+
+                        campo.addEventListener("input", function(){
+                            if(this.value.trim()!==''){
+                                this.style.backgroundColor = "";
+                            }
+                        });
+                    });
+                });
+            </script>
 
         </section>
+        
     </header>
 
     {% block main %}
