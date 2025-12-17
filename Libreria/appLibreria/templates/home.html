@@ -4,7 +4,7 @@
 {% block main %}
     <main>
         <h2 class="titulos_h2" id="titulo_bestsellers">Algunas novedades que podrian interesarte:</h2>
-        </br><!--Aquí deberia ir el bloque de libros novedosos-->
+        <br>
 
         <div id="Lib_novedosos">
             {% for libro in Libros %}
@@ -14,15 +14,16 @@
                         <a href="{% url 'detalleLibro' libro.isbn %}">
                             <img class="fondo_libros" src="{{libro.imagen.url}}" alt="Sin imagen">
                         </a>
-                        <section class="libros_letras">
+                        <div class="libros_letras">
                             <ul class="datosLibro">
-                                <a id="Dtitulo" href="{% url 'detalleLibro' libro.isbn %}">
-                                    <li class="datosLibro" id="tit_libro_Si"><strong>{{libro.titulo}}</strong></li>
-                                </a>
+                                <li><a class="Dtitulo" href="{% url 'detalleLibro' libro.isbn %}">
+                                    <span class="datosLibro tit_libro_Si"><strong>{{libro.titulo}}</strong></span>
+                                    </a>
+                                </li>
                                 <li class="datosLibro"> {{libro.autor}} </li>
-                                <li class="datosLibro" id="Dprecio"> <strong>{{libro.precio}} €</strong></li>
+                                <li class="datosLibro"> <div class="Dprecio"><strong>{{libro.precio}} €</strong></div></li>
                             </ul>  
-                        </section>
+                        </div>
                     </div>
                     {% else %}
                     <div class="muestraLibros">
@@ -31,15 +32,15 @@
                                 <p>Sin imagen</p>             
                             </div>
                         </a>
-                        <section class="libros_letras">
+                        <div class="libros_letras">
                             <ul class="datosLibro">
-                                <a id="Dtitulo" href="{% url 'detalleLibro' libro.isbn %}">
-                                    <li class="datosLibro" id="tit_libro_No" ><strong>{{libro.titulo}}</strong></li>
-                                </a>
+                                <li><a class="Dtitulo" href="{% url 'detalleLibro' libro.isbn %}">
+                                    <span class="datosLibro tit_libro_No" ><strong>{{libro.titulo}}</strong></span>
+                                </a></li>
                                 <li class="datosLibro"> {{libro.autor}} </li>
-                                <li class="datosLibro" id="Dprecio"> <strong>{{libro.precio}} €</strong></li>
+                                <li class="datosLibro"> <div class="Dprecio"><strong>{{libro.precio}} €</strong></div></li>
                             </ul>  
-                        </section>
+                        </div>
                     </div>
                     {% endif %}
                 {% endif %}
@@ -54,23 +55,24 @@
             <input id="BTN-mandar" type="submit">
         </form>
 
-        </br>
-        <article class="div_ListaLibros">
+        <br>
+        <div class="div_ListaLibros">
             {% for libro in Libros %}
                 {% if libro.imagen %}
                 <div class="muestraLibros">
                     <a href="{% url 'detalleLibro' libro.isbn %}">
                         <img class="fondo_libros" src="{{libro.imagen.url}}" alt="Sin imagen">
                     </a>
-                    <section class="libros_letras">
+                    <div class="libros_letras">
                         <ul class="datosLibro">
-                            <a id="Dtitulo" href="{% url 'detalleLibro' libro.isbn %}"> <!--¿Se puede poner un ID aquí?-->
-                                <li class="datosLibro" id="tit_libro_Si"><strong>{{libro.titulo}}</strong></li>
-                            </a>
+                            <li><a class="Dtitulo" href="{% url 'detalleLibro' libro.isbn %}"> <!--¿Se puede poner un ID aquí?-->
+                                <span class="datosLibro tit_libro_Si"><strong>{{libro.titulo}}</strong></span>
+                                </a>
+                            </li>
                             <li class="datosLibro"> {{libro.autor}} </li>
-                            <li class="datosLibro" id="Dprecio"> <strong>{{libro.precio}} €</strong></li>
+                            <li class="datosLibro"> <div class="Dprecio"><strong>{{libro.precio}} €</strong></div></li>
                         </ul>  
-                    </section>
+                    </div>
                 </div>
                 {% else %}
                 <div class="muestraLibros">
@@ -79,19 +81,19 @@
                             <p>Sin imagen</p>             
                         </div>
                     </a>
-                    <section class="libros_letras">
+                    <div class="libros_letras">
                         <ul class="datosLibro">
-                            <a id="Dtitulo" href="{% url 'detalleLibro' libro.isbn %}">
-                                <li class="datosLibro" id="tit_libro_No" ><strong>{{libro.titulo}}</strong></li>
-                            </a>
+                            <li><a class="Dtitulo" href="{% url 'detalleLibro' libro.isbn %}">
+                                <span class="datosLibro tit_libro_No" ><strong>{{libro.titulo}}</strong></span>
+                            </a></li>
                             <li class="datosLibro"> {{libro.autor}} </li>
-                            <li class="datosLibro" id="Dprecio"> <strong>{{libro.precio}} €</strong></li>
+                            <li class="datosLibro"> <div class="Dprecio"><strong>{{libro.precio}} €</strong></div> </li>
                         </ul>  
-                    </section>
+                    </div>
                 </div>
                 {% endif %}
             {% endfor %} 
-        </article> 
+        </div> 
 
         <script>
             function refrescar(event){
@@ -111,9 +113,9 @@
             };
 
 
-            function soloBuscados(event){ //MUCHO CUIDADO: si en el html hay algun espacio de sobra en la etiqueta que quieres para
-                event.preventDefault();//Por si acaso                           hacer el buscador, al coger el texto para comprobar  
-//                                                                               tambien lo cogera, a mi me ha pasado tener cuidado
+            function soloBuscados(event){
+                event.preventDefault();//Por si acaso                             
+//                                                                               
 
                 let tit_bestsellers = document.getElementById("titulo_bestsellers");
                 tit_bestsellers.style.display = "none";
@@ -131,22 +133,22 @@
                 
                 //Tengo que coger la lista y modificarla:
                 for (let libro of Libros){
-                    let libroSI = libro.querySelector('#tit_libro_Si');
-                    let libroNO = libro.querySelector('#tit_libro_No');
+                    let libroSI = libro.querySelector('.tit_libro_Si');
+                    let libroNO = libro.querySelector('.tit_libro_No');
 
                     if (libroSI != null){
                         if(texto.toLowerCase() != libroSI.textContent.toLowerCase()){
                             libro.style.display = "none";
-                            //alert("Titulo:" + texto + " / " + libroSI.textContent); //Esto es para ver si algo iba mal o no
+                            
                         };
                     };
                     
                     if(libroNO != null){
                         if(texto.toLowerCase() != libroNO.textContent.toLocaleLowerCase()){
                             libro.style.display = "none";
-                            //alert("Titulo:" + texto + " / " + libroNO.textContent);
+                            
                         };
-                    };//Hay que añadir que al terminar se vuelva a poner todo en display block, sino permanece oculto al volver a buscar
+                    };
                     
 
                 };

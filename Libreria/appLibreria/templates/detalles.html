@@ -10,21 +10,23 @@
             
             <div>
                 <ul>
-                    <li><strong>Titulo: </strong> <span id="tit_libro">{{libro.titulo}}</span></li>
+                    <li><strong>Titulo: </strong> <span class="tit_libro">{{libro.titulo}}</span></li>
                     <li><strong>Precio: </strong> {{libro.precio}} €</li>
                     <li><strong>Num paginas: </strong> {{libro.num_paginas}}</li>
                     <li><strong>Autor: </strong> {{libro.autor}}</li>
-                    <li><strong>En stock: </strong> <span id="stock">{{libro.stock}} </span></li>
-                    <li><strong>Has comprado: </strong> <span id="cant_compra">{{cant_compra}} </span> unidades</li>
-                    <h3>Descripción:</h3>
-                    <p>{{libro.descripcion}}</p>
+                    <li><strong>En stock: </strong> <span class="stock">{{libro.stock}} </span></li>
+                    <li><strong>Has comprado: </strong> <span class="cant_compra">{{cant_compra}} </span> unidades</li>
                 </ul>
+
+                <h3>Descripción:</h3>
+                <p>{{libro.descripcion}}</p>
+
                 <div style="display: flex; justify-content: center; gap: 100px;"> 
                     <div><a class="botonesDetalles" href="{% url 'antiguedad' %}">
                         <div>Volver a Home</div>
                     </a></div>
                     
-                    <div><a class="botonesDetalles" id="Boton_mandar_carrito" href="{% url 'aniadirLibro' libro.isbn libro.stock %}"> 
+                    <div><a class="botonesDetalles Boton_mandar_carrito" href="{% url 'aniadirLibro' libro.isbn libro.stock %}"> 
                         <div>Añadir al carrito</div>
                     </a></div>
                 </div>
@@ -40,21 +42,23 @@
             
             <div>
                 <ul>
-                    <li><strong>Titulo: </strong> <span id="tit_libro">{{libro.titulo}}</span> </li>
+                    <li><strong>Titulo: </strong> <span class="tit_libro">{{libro.titulo}}</span> </li>
                     <li><strong>Precio: </strong> {{libro.precio}} €</li>
                     <li><strong>Num paginas: </strong> {{libro.num_paginas}}</li>
                     <li><strong>Autor: </strong> {{libro.autor}}</li>
-                    <li><strong>Stock: </strong> <span id="stock">{{libro.stock}} </span> </li>
-                    <li><strong>Has comprado: </strong> <span id="cant_compra">{{cant_compra}} </span> unidades</li>
-                    <h3>Descripción:</h3>
-                    <p>{{libro.descripcion}}</p>
+                    <li><strong>Stock: </strong> <span class="stock">{{libro.stock}} </span> </li>
+                    <li><strong>Has comprado: </strong> <span class="cant_compra">{{cant_compra}} </span> unidades</li>
                 </ul>
+
+                <h3>Descripción:</h3>
+                <p>{{libro.descripcion}}</p>
+
                 <div style="display: flex; justify-content: center; gap: 100px;">
                     <div><a class="botonesDetalles" href="{% url 'antiguedad' %}" >
                         <div>Volver a Home</div>
                     </a></div>
                     
-                    <div><a class="botonesDetalles" id="Boton_mandar_carrito" href="{% url 'aniadirLibro' libro.isbn libro.stock %}">
+                    <div><a class="botonesDetalles Boton_mandar_carrito" href="{% url 'aniadirLibro' libro.isbn libro.stock %}">
                         <div>Añadir al carrito</div>
                     </a></div>
                 </div>
@@ -67,11 +71,11 @@
 
             function superado_stock(event){//Si se supera el stock no te deja comprar
 
-                let libro = document.querySelector('#tit_libro').textContent;
-                let stock = parseInt(document.querySelector('#stock').textContent);
-                let cant = parseInt(document.querySelector('#cant_compra').textContent);
+                let libro = document.querySelector('.tit_libro').textContent;
+                let stock = parseInt(document.querySelector('.stock').textContent);
+                let cant = parseInt(document.querySelector('.cant_compra').textContent);
 
-                if(stock <= cant){//Y si se desactiva el boton?
+                if(stock <= cant){
                     event.preventDefault();
                     
                     alert("Lo sentimos, pero no quedan mas unidades de: " + libro + " para comprar");
@@ -81,7 +85,7 @@
                 };
             };
 
-            const BTN_carrito = document.querySelector('#Boton_mandar_carrito');
+            const BTN_carrito = document.querySelector('.Boton_mandar_carrito');
 
             BTN_carrito.addEventListener('click', function(event){
                 superado_stock(event);

@@ -4,6 +4,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>    
@@ -19,14 +20,14 @@
             
 
         </section>
-        <section id="formS"> 
-            <article id="formA">
+        <div id="formS"> 
+            <div id="formA">
                 <form method="post" id="login">
                 {%csrf_token%}
                 {{form.as_p}}
                 <button type="submit" id="Iniciar">Iniciar sesion</button>
                 </form>
-            </article>
+            </div>
             
             <script>
                 document.addEventListener("DOMContentLoaded",function(){
@@ -53,7 +54,7 @@
                 });
             </script>
 
-        </section>
+        </div>
         
     </header>
 

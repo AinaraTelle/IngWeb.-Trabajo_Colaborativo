@@ -4,6 +4,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>    
@@ -19,14 +20,14 @@
 
 
         </section>
-        <section id="formS">
-            <article id="formA">
+        <div id="formS">
+            <div id="formA">
                 <form method="post" id="registro">
                     {%csrf_token%}
                     {{form.as_p}}
                     <button type="submit">Crear perfil e iniciar sesion</button>
                 </form>
-            </article>
+            </div>
             <script>
                 document.addEventListener("DOMContentLoaded",function(){
                     const campos=document.querySelectorAll(
@@ -52,7 +53,7 @@
                     });
                 });
             </script>
-        </section>
+        </div>
         
     </header>
     

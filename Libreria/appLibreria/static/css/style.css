@@ -1,6 +1,6 @@
 body {
     background-color: #ffe2d2;
-    /* padding: 0; */
+
     margin:0;
     min-width: 830px;
 }
@@ -8,8 +8,6 @@ body {
 #headerBase{
     background-color: #d87746;
     margin-bottom: 30px;
-
-    /* padding-bottom: 10px; */
 
     display: grid;
     grid-template-columns: 30% 70%;
@@ -91,7 +89,7 @@ body {
     border-radius: 15px;
     background-color: #fff4ee;
     border: solid 2px #965538 ;
-    /*padding: 10px;*/
+    
     margin-bottom: 15px;
     text-decoration: none;
 }
@@ -124,18 +122,13 @@ body {
     padding-left: 10px;
     font-size: 25px;
     width: 25%;
-    /* border: 2px solid green; */
+    
     display: flex;
     justify-content: center;
 }
 
 .muestra_libros_detalles{
-    /* width: 320px;
-    height: 460px;
-    margin: 5px;
-    padding: 3px; 
-    border: solid 2px #965538;
-    border-radius: 4px; */
+    
     
     background-color: #fff4ee;
 
@@ -174,7 +167,7 @@ body {
     align-items: center;
     padding-right: 3px;
 
-    /* border: 2px solid black; */
+    
 }
 
 main{
@@ -193,7 +186,7 @@ main{
     justify-content: center;
     gap: 35px; 
     padding: 10px;
-    /* border: solid 2px #513896 ; */
+    
 }
 .centradoEnMedio{
     display: flex; 
@@ -213,22 +206,21 @@ main{
     margin-right: 2px;
     color:#1a0d07;
     width: 100%;
-   
-    /* border: 2px solid rgb(255, 242, 0); */
 }
 .datosLibro li {
     margin: 5px;
     text-decoration: none;
-    /* border: 2px solid rgb(9, 255, 0); */
+    
 }
-#Dprecio{
+.Dprecio{
     color: #8d3800;
     font-size: 20px;
     text-align: center;
 }
-#Dtitulo{
+.Dtitulo{
     text-decoration: none;
     font-size: 17px;
+    color: #000;
 }
 #inputPrecio{
     width: 70px;
