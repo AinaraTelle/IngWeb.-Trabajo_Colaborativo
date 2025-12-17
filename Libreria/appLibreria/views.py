@@ -4,8 +4,8 @@ from django.http import HttpResponse, Http404
 from appLibreria import models #importamos la tabla de models para poder trabajar con los datos de la BD
 from django.contrib.auth.decorators import login_required
 from .forms import registroForm,logInForm,updateForm
-from .models import Usuario
-from django.contrib.auth import login
+from django.contrib.auth.models import User
+from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.views.decorators.http import require_POST
@@ -172,13 +172,12 @@ def registrar_usuario(request):
         form=registroForm(request.POST)
         if form.is_valid():
             if form.cleaned_data['contrasenia']==form.cleaned_data['contrasenia2']:
-                usuario=Usuario(
+                user=User.objects.create_user(
                     email=form.cleaned_data['email'],
-                    contrasenia=make_password(form.cleaned_data['contrasenia']),
-                    nombre=form.cleaned_data['nombre']
+                    password=form.cleaned_data['contrasenia'],
+                    username=form.cleaned_data['nombre']
                 )
-                usuario.save()
-                request.session['id']=usuario.id#para hacer login manualmente
+                login(request,user)
                 return redirect('generoTodosLibros')
             else:
                 return HttpResponse("Contraseñas no coinciden")
@@ -190,35 +189,35 @@ def logInUsuario(request):
     if request.method=='POST':
         form=logInForm(request.POST)
         if form.is_valid():
-            try:
-                usuario=Usuario.objects.get(nombre=form.cleaned_data['nombre'], email=form.cleaned_data['email'])
-            except Usuario.DoesNotExist:
-                return HttpResponse("Usuario no existente, nombre o direccion incorrectos")
             
-            if check_password(form.cleaned_data['contrasenia'], usuario.contrasenia):
-                request.session['id']=usuario.id
-                return redirect('generoTodosLibros')
+                user=authenticate(
+                    request,
+                    username=form.cleaned_data['nombre'],
+                    password=form.cleaned_data['contrasenia']
+                )
+
+                if user is not None:
+                    login(request,user)
+                    return redirect('generoTodosLibros')
+                else:
+                    return HttpResponse("Usuario no existente, nombre o direccion incorrectos")
     else:
         form=logInForm()
     return render(request, 'login.html', {'form':form})
 
     
-
+@login_required
 def actualizar_contraseña(request):
-    id_us=request.session.get('id')
-    if not(id_us):
-        redirect('login')
-    usuario=Usuario.objects.get(id=id_us)
-
     if request.method == 'POST': #Poenmos esto ya que se puede llegar a cambiar la contraseña sin querer con un get
         form=updateForm(request.POST)
         if form.is_valid():
-            if not check_password(form.cleaned_data['contrasenia'], usuario.contrasenia):
+            if not request.user.check_password(form.cleaned_data['contrasenia']):
                 return HttpResponse("Contraseña actual incorrecta")
             if form.cleaned_data['contrasenia1'] != form.cleaned_data['contrasenia2']:
                 return HttpResponse("Las nuevas contraseñas no coinciden")
-            usuario.contrasenia = make_password(form.cleaned_data['contrasenia1'])
-            usuario.save()
+            request.user.set_password(form.cleaned_data['contrasenia1'])
+            request.user.save()
+            login(request,request.user)
             return redirect('ver_carrito')
     else:
         form=updateForm()

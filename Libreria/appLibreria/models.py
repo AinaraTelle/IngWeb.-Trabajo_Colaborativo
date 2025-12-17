@@ -55,14 +55,3 @@ class CarritoItem(models.Model):
     cantidad = models.PositiveIntegerField(default=1)
     
 
-
-                                    
-class Usuario(models.Model):
-    id = models.AutoField(primary_key=True)
-    email=models.CharField(unique=True)
-    contrasenia=models.CharField(max_length=50)
-    nombre=models.CharField(max_length=50,unique=True)
-
-    class Meta:
-        db_table='User'
-
