@@ -1,8 +1,8 @@
 body {
     background-color: #ffe2d2;
-
     margin:0;
     min-width: 830px;
+    min-height: 100vh
 }
 
 #headerBase{
