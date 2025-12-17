@@ -72,7 +72,7 @@ def detalles_libro(request, isbn_sel):
 
 def aniadir_Libro(request, isbn_lib):#Y si hago que pase el ISBN y asi ya sabe que libro se añade
     nv_libro = models.Libro.objects.get(isbn=isbn_lib)
-    nv_carrito = models.Carrito.objects.get(usuario=request.user)
+    nv_carrito = models.Carrito.objects.get(usuario=request.user)  #AAAAAAAAAAAALLLLLLLLLLLLLLLIIIIIIIII
 
     existente, nuevo_libro = models.CarritoItem.objects.get_or_create( carrito = nv_carrito, libro = nv_libro)#Ya guarda automaticamente si lo tiene que crear
 
@@ -143,7 +143,7 @@ def ver_carrito(request):
     carrito ,creado = models.Carrito.objects.get_or_create(usuario=request.user)# Esta con coma ya que aqui se crea el carrito una vez que el usuario accede por primera vez o detecta si esta creado, por lo tanto el carrito sería el tipo de item y el creado es true o false
     items=carrito.items.all()#Obtenemos los libros con su precio y la cantidad de los mismos
     context = {
-        'usuario': request.user,
+        'usuario': request.user,        #AAAAAAAAAAAALLLLLLLLLLLLLLLIIIIIIIII
         'carrito': carrito,
         'items':items,
         'total': carrito.total
@@ -195,7 +195,7 @@ def logInUsuario(request):
             except Usuario.DoesNotExist:
                 return HttpResponse("Usuario no existente, nombre o direccion incorrectos")
             
-            if check_password(form.cleaned_data['contrasenia'], usuario.password_hash):
+            if check_password(form.cleaned_data['contrasenia'], usuario.contrasenia):
                 request.session['id']=usuario.id
                 return redirect('generoTodosLibros')
     else:
@@ -205,10 +205,10 @@ def logInUsuario(request):
     
 
 def actualizar_contraseña(request):
-    id=request.session.get('id')
-    if not(id):
+    id_us=request.session.get('id')
+    if not(id_us):
         redirect('login')
-    usuario=Usuario.objects.get('id')
+    usuario=Usuario.objects.get(id=id_us)
 
     if request.method == 'POST': #Poenmos esto ya que se puede llegar a cambiar la contraseña sin querer con un get
         form=updateForm(request.POST)
@@ -217,7 +217,7 @@ def actualizar_contraseña(request):
                 return HttpResponse("Contraseña actual incorrecta")
             if form.cleaned_data['contrasenia1'] != form.cleaned_data['contrasenia2']:
                 return HttpResponse("Las nuevas contraseñas no coinciden")
-            usuario.contrasenia = make_password(form.cleaned_data['contrasenia_nueva'])
+            usuario.contrasenia = make_password(form.cleaned_data['contrasenia1'])
             usuario.save()
             return redirect('ver_carrito')
     else:

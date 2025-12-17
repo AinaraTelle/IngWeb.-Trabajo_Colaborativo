@@ -64,5 +64,5 @@ class Usuario(models.Model):
     nombre=models.CharField(max_length=50,unique=True)
 
     class Meta:
-        db_table='Usuarios'
+        db_table='User'
 
