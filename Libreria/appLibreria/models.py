@@ -58,7 +58,11 @@ class CarritoItem(models.Model):
 
                                     
 class Usuario(models.Model):
-    nombre_usuario=models.CharField(unique=True)
-    email_usuario=models.EmailField(unique=True)
-    password=models.CharField
+    id = models.AutoField(primary_key=True)
+    email=models.CharField(unique=True)
+    contrasenia=models.CharField(max_length=50)
+    nombre=models.CharField(max_length=50,unique=True)
+
+    class Meta:
+        db_table='Usuarios'
 

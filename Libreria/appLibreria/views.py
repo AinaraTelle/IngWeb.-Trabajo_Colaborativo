@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse, Http404 
 from appLibreria import models #importamos la tabla de models para poder trabajar con los datos de la BD
 from django.contrib.auth.decorators import login_required
-from .forms import registroFrom, logInForm
+from .forms import registroForm,logInForm,updateForm
 from .models import Usuario
 from django.contrib.auth import login
 from django.contrib.auth.forms import PasswordChangeForm
@@ -169,21 +169,21 @@ def comprar(request):#Basicamente existe para actualizar la existencias de libro
 
 def registrar_usuario(request):
     if request.method=='POST':
-        form=registroFrom(request.POST)
-        if form.is_valid:
-            if form.cleaned_data['password']==form.cleaned_data['password2']:
+        form=registroForm(request.POST)
+        if form.is_valid():
+            if form.cleaned_data['contrasenia']==form.cleaned_data['contrasenia2']:
                 usuario=Usuario(
-                    nombre_usuario=form.cleaned_data['nombre_usuario'],
-                    email_usuario=form.cleaned_data['email_usuario'],
-                    password_hash=make_password(form.cleaned_data['password'])
+                    email=form.cleaned_data['email'],
+                    contrasenia=make_password(form.cleaned_data['contrasenia']),
+                    nombre=form.cleaned_data['nombre']
                 )
                 usuario.save()
-                request.session['usuario_id']=usuario.id#para hacer login manualmente
+                request.session['id']=usuario.id#para hacer login manualmente
                 return redirect('generoTodosLibros')
             else:
                 return HttpResponse("Contraseñas no coinciden")
     else:
-        form=registroFrom()
+        form=registroForm()
     return render(request, 'registro.html', {'form': form})
 
 def logInUsuario(request):
@@ -191,12 +191,12 @@ def logInUsuario(request):
         form=logInForm(request.POST)
         if form.is_valid():
             try:
-                usuario=Usuario.objects.get(nombre_usuario=form.cleaned_data['nombre_usuario'], email_usuario=form.cleaned_data['email_usuario'])
+                usuario=Usuario.objects.get(nombre=form.cleaned_data['nombre'], email=form.cleaned_data['email'])
             except Usuario.DoesNotExist:
                 return HttpResponse("Usuario no existente, nombre o direccion incorrectos")
             
-            if check_password(form.cleaned_data['password'], usuario.password):
-                request.session['usuario_id']=usuario.id
+            if check_password(form.cleaned_data['contrasenia'], usuario.password_hash):
+                request.session['id']=usuario.id
                 return redirect('generoTodosLibros')
     else:
         form=logInForm()
@@ -205,11 +205,21 @@ def logInUsuario(request):
     
 
 def actualizar_contraseña(request):
-    if request.method == 'POST': #Poenmos esto ya que se puede llegar a cambiar la contraseña sin querer con un get
-        form=PasswordChangeForm(user=request.user, data=request.POST)
-        if form.is_valid():
-            user = form.save()#Guardamos el user con la contraseña actualizada
-            update_session_auth_hash(request, user)#Importante:Se utiliza para que no nos eche de la sesión
-            return redirect('ver_carrito')
+    id=request.session.get('id')
+    if not(id):
+        redirect('login')
+    usuario=Usuario.objects.get('id')
 
+    if request.method == 'POST': #Poenmos esto ya que se puede llegar a cambiar la contraseña sin querer con un get
+        form=updateForm(request.POST)
+        if form.is_valid():
+            if not check_password(form.cleaned_data['contrasenia'], usuario.contrasenia):
+                return HttpResponse("Contraseña actual incorrecta")
+            if form.cleaned_data['contrasenia1'] != form.cleaned_data['contrasenia2']:
+                return HttpResponse("Las nuevas contraseñas no coinciden")
+            usuario.contrasenia = make_password(form.cleaned_data['contrasenia_nueva'])
+            usuario.save()
+            return redirect('ver_carrito')
+    else:
+        form=updateForm()
     return render(request, 'carrito.html', {'form': form})

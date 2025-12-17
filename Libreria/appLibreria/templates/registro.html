@@ -16,15 +16,16 @@
             <h1 id="TituloPagina">
                {% block titleXD %} <b>Registrarse</b>{% endblock %} 
             </h1>
-            
+
+
+        </section>
+        <article>
             <form method="post">
                 {%csrf_token%}
                 {{form.as_p}}
                 <button type="submit">Crear perfil e iniciar sesion</button>
             </form>
-
-
-        </section>
+        </article>
     </header>
 
     {% block main %}
