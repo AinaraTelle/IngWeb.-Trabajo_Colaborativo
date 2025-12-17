@@ -70,17 +70,24 @@ def detalles_libro(request, isbn_sel):
     return render(request, 'detalles.html', {'libro': Libro, 'ISBN': isbn_sel})#Esta forma de pasarle "Libro" es la misma de siempre pero sin meterlo todo en una variable
 
 
-def aniadir_Libro(request, isbn_lib):#Y si hago que pase el ISBN y asi ya sabe que libro se añade
+def aniadir_Libro(request, isbn_lib, cant):#Y si hago que pase el ISBN y asi ya sabe que libro se añade
     nv_libro = models.Libro.objects.get(isbn=isbn_lib)
-    nv_carrito = models.Carrito.objects.get(usuario=request.user)  #AAAAAAAAAAAALLLLLLLLLLLLLLLIIIIIIIII
+    nv_carrito = models.Carrito.objects.get(usuario=request.user)  
 
     existente, nuevo_libro = models.CarritoItem.objects.get_or_create( carrito = nv_carrito, libro = nv_libro)#Ya guarda automaticamente si lo tiene que crear
 
     if( not nuevo_libro):#Hay que hacer que cuando no haya mas stock no deje comprar
         #sumamos uno a la cantidad y lo devolvemos
-        existente.cantidad += 1
-        existente.save()
+        cantidad_pasada = Decimal(cant)
         
+        if(existente.cantidad < cantidad_pasada):#Si la cantidad pasada (stock) es menor que lo que tenemos en carro, compra. 
+            #Asi no compra si no queda stock.
+            existente.cantidad += 1
+            existente.save()
+            
+
+        if(cantidad_pasada > 0):
+            existente.cantidad = cantidad_pasada
     
     return render(request, 'detalles.html', {'libro': nv_libro, 'ISBN': isbn_lib, 'cant_compra': existente.cantidad})#La idea es que refresque la PG pero añada el libro al carrito
 
@@ -143,7 +150,7 @@ def ver_carrito(request):
     carrito ,creado = models.Carrito.objects.get_or_create(usuario=request.user)# Esta con coma ya que aqui se crea el carrito una vez que el usuario accede por primera vez o detecta si esta creado, por lo tanto el carrito sería el tipo de item y el creado es true o false
     items=carrito.items.all()#Obtenemos los libros con su precio y la cantidad de los mismos
     context = {
-        'usuario': request.user,        #AAAAAAAAAAAALLLLLLLLLLLLLLLIIIIIIIII
+        'usuario': request.user,        
         'carrito': carrito,
         'items':items,
         'total': carrito.total

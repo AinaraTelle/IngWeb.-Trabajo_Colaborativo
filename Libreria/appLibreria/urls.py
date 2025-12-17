@@ -22,8 +22,8 @@ urlpatterns = [
 
 
     path('backapp/', views.masCortos,name='masCortos' ),
-    path('detalles/<str:isbn_sel>', views.detalles_libro, name='detalleLibro'),
-    path('detalles/ref/<str:isbn_lib>', views.aniadir_Libro, name='aniadirLibro'),
+    path('detalles/<str:isbn_sel>/', views.detalles_libro, name='detalleLibro'),
+    path('detalles/ref/<str:isbn_lib>/<str:cant>/', views.aniadir_Libro, name='aniadirLibro'),
 
     path('carrito/', views.ver_carrito, name='ver_carrito'),
     path('carrito/comprar/', views.comprar, name='comprar'),

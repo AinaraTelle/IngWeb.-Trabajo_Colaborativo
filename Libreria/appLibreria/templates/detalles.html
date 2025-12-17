@@ -24,7 +24,7 @@
                         <div>Volver a Home</div>
                     </a></div>
                     
-                    <div><a class="botonesDetalles" id="Boton_mandar_carrito" href="{% url 'aniadirLibro' libro.isbn %}"> 
+                    <div><a class="botonesDetalles" id="Boton_mandar_carrito" href="{% url 'aniadirLibro' libro.isbn libro.stock %}"> 
                         <div>Añadir al carrito</div>
                     </a></div>
                 </div>
@@ -54,7 +54,7 @@
                         <div>Volver a Home</div>
                     </a></div>
                     
-                    <div><a class="botonesDetalles" id="Boton_mandar_carrito" href="{% url 'aniadirLibro' libro.isbn %}">
+                    <div><a class="botonesDetalles" id="Boton_mandar_carrito" href="{% url 'aniadirLibro' libro.isbn libro.stock %}">
                         <div>Añadir al carrito</div>
                     </a></div>
                 </div>
