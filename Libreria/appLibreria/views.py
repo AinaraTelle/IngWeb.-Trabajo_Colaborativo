@@ -229,3 +229,9 @@ def actualizar_contraseña(request):
     else:
         form=updateForm()
     return render(request, 'carrito.html', {'form': form})
+
+@login_required
+def logOut(request):
+    if request.method=='POST':
+        logout(request)
+    return redirect('LogIn')
