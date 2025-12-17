@@ -205,7 +205,7 @@ def logInUsuario(request):
 
                 if user is not None:
                     login(request,user)
-                    return redirect('generoTodosLibros')
+                    return redirect('antiguedad')
                 else:
                     return HttpResponse("Usuario no existente, nombre o direccion incorrectos")
     else:
@@ -234,4 +234,4 @@ def actualizar_contraseña(request):
 def logOut(request):
     if request.method=='POST':
         logout(request)
-    return redirect('LogIn')
+    return redirect('inicio')
